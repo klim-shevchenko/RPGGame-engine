@@ -13,10 +13,10 @@ im2_1 = Sprite(image='images/person1.png')
 im2_2 = Sprite(image='images/person2.png')
 
 # Добавление изображения на Canvas с помощью метода add_sprite
-canvas.add_sprite(im1_1, 140, 140, 1)
-canvas.add_sprite(im2_1, 200, 100, 0)
+canvas.add_sprite(im1_1, 140, 140, 0)
+canvas.add_sprite(im2_1, 200, 100, 1)
 
-#canvas.update()
+canvas.update()
 
 # Функции, которые будут вызываться при нажатии кнопки
 def on_button_click():
@@ -24,8 +24,8 @@ def on_button_click():
 def on_button_click1():
     canvas.delete_sprite(im1_1)
 def on_button_click2():
-    im2_1.update(canvas, 250, 100)
-    im1_1.update(canvas, 140, 140)
+    im2_1.update(250, 100)
+    im1_1.update(140, 140)
     canvas.update()
 def on_button_click3():
     canvas.clear_all()

@@ -4,16 +4,15 @@ class Sprite:
     def __init__(self, image):
         self.image = tk.PhotoImage(file=image)
         self.tag = None
-        #self.x = 0
-        #self.y = 0
+        self.x = 0
+        self.y = 0
         self.z = 0  # z-координата спрайта
 
-    def update(self, canvas, new_x, new_y):
-        """Обновляет координаты спрайта на Canvas."""
+    def update(self, new_x, new_y):
+        """Обновляет координаты спрайта."""
         if self.tag:
-            canvas.coords(self.tag, new_x, new_y)
-            #self.x = new_x
-            #self.y = new_y
+            self.x = new_x
+            self.y = new_y
 
     def set_tag(self, tag):
         """Устанавливает тег спрайта."""
