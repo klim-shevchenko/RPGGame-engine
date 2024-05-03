@@ -1,5 +1,5 @@
-from rpg.Graphics import *
-from rpg.Sprite import *
+from rpg.graphics import *
+from rpg.sprite import *
 
 root = tk.Tk()
 root.geometry('1500x1500')
@@ -8,20 +8,25 @@ root.geometry('1500x1500')
 canvas = Graphics(root, width=1500, height=1500)
 
 # Загрузка изображения
-im1 = Sprite(canvas, image='images/fon1.png')
-im2 = Sprite(canvas, image='images/person1.png')
+im1_1 = Sprite(image='images/fon1.png')
+im2_1 = Sprite(image='images/person1.png')
+im2_2 = Sprite(image='images/person2.png')
 
 # Добавление изображения на Canvas с помощью метода add_sprite
-canvas.add_sprite(im1, 140, 140)
-canvas.add_sprite(im2, 200, 100)
+canvas.add_sprite(im1_1, 140, 140, 1)
+canvas.add_sprite(im2_1, 200, 100, 0)
+
+#canvas.update()
 
 # Функции, которые будут вызываться при нажатии кнопки
 def on_button_click():
-    canvas.change_sprite(im1, im2.image)
+    canvas.change_sprite(im2_1, im2_2.image)
 def on_button_click1():
-    canvas.delete_sprite(im1)
+    canvas.delete_sprite(im1_1)
 def on_button_click2():
-    canvas.update(im2, 210, 100)
+    im2_1.update(canvas, 250, 100)
+    im1_1.update(canvas, 140, 140)
+    canvas.update()
 def on_button_click3():
     canvas.clear_all()
 
