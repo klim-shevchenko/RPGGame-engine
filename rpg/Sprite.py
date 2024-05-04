@@ -1,5 +1,5 @@
 import tkinter as tk
-class Sprite:
+class sprite:
     """Класс спрайта для работы с изображениями на Canvas."""
     def __init__(self, image):
         self.image = tk.PhotoImage(file=image)

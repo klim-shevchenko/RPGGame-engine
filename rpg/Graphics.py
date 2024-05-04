@@ -1,5 +1,5 @@
 import tkinter as tk
-class Graphics(tk.Canvas):
+class graphics(tk.Canvas):
     """Класс Canvas с дополнительными методами для работы со спрайтами."""
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -18,10 +18,8 @@ class Graphics(tk.Canvas):
 
     def change_sprite(self, sprite, new_image):
         """Изменяет изображение спрайта."""
-        #self.sprites.remove(sprite)
         self.itemconfig(sprite.get_tag(), image=new_image)
         sprite.image=new_image
-        #self.sprites.append(sprite)
 
     def delete_sprite(self, sprite):
         """Удаляет спрайт с Canvas."""
@@ -34,15 +32,8 @@ class Graphics(tk.Canvas):
             self.delete(sprite.get_tag())
         self.sprites.clear()
 
-    #def update(self):
-        #"""Перерисовывает все спрайты."""
-        #for sprite in self.sprites:
-            #self.coords(sprite.get_tag(), sprite.tag.x, sprite.tag.y)
-            #sprite.update(self, x,y)
-            #self.itemconfig(sprite.get_tag(), image=sprite.image)
     def update(self):
         """Перерисовывает все спрайты."""
-        self.sprites.sort(key=lambda sprite: sprite.z)  # сортировка спрайтов по z-координате
         for sprite in self.sprites:
             self.tag_raise(sprite.get_tag())  # перемещаем спрайт на передний план
             self.coords(sprite.get_tag(), sprite.x, sprite.y)
