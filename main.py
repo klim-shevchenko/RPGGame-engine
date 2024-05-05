@@ -7,16 +7,16 @@ root = tk.Tk()
 root.geometry('1500x1500')
 
 # Создание экземпляра класса graphics, который будет взаимодействовать с окном
-canvas = graphics(root, width=1500, height=1500)
+canvas = Graphics(root, width=1500, height=1500)
 
 # Создание экземпляра класса game
-first_game = game()
-house = area()
-meadow = area()
+first_game = Game()
+house = Area()
+meadow = Area()
 
 # Загрузка изображения
-im1_1 = sprite(image='images/fon1.png')
-im1_2 = sprite(image='images/fon2.png')
+im1_1 = Sprite(image='images/fon1.png')
+im1_2 = Sprite(image='images/fon2.png')
 '''im2_1 = sprite(image='images/person1.png')
 im2_2 = sprite(image='images/person2.png')'''
 
@@ -24,8 +24,8 @@ im2_2 = sprite(image='images/person2.png')'''
 canvas.add_sprite(im1_1, 140, 140, 0)
 canvas.add_sprite(im2_1, 200, 100, 1)'''
 
-house.area_add_sprite(im1_1, 140, 140, 0)
-meadow.area_add_sprite(im1_2, 140, 140, 0)
+house.add_sprite(im1_1, 140, 140, 0)
+meadow.add_sprite(im1_2, 140, 140, 0)
 first_game.new_area(house)
 first_game.new_area(meadow)
 canvas.update()
@@ -42,10 +42,18 @@ def on_button_click2():
 def on_button_click3():
     canvas.clear_all()'''
 def on_button_click4():
-    first_game.set_area(house, canvas)
+    canvas.clear_all()
+    first_game.set_area(house)
+    for sprite in house.sprites:
+        canvas.add_sprite(sprite, sprite.x, sprite.y, sprite.z)
+    canvas.update()
 
 def on_button_click5():
-    first_game.set_area(meadow, canvas)
+    canvas.clear_all()
+    first_game.set_area(meadow)
+    for sprite in meadow.sprites:
+        canvas.add_sprite(sprite, sprite.x, sprite.y, sprite.z)
+    canvas.update()
 
 # Создание кнопки
 '''button = tk.Button(root, text="поменять спрайт", command=on_button_click)

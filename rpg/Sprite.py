@@ -1,5 +1,5 @@
 import tkinter as tk
-class sprite:
+class Sprite:
     """Класс спрайта для работы с изображениями на Canvas."""
     def __init__(self, image):
         self.image = tk.PhotoImage(file=image)
@@ -7,12 +7,6 @@ class sprite:
         self.x = 0
         self.y = 0
         self.z = 0  # z-координата спрайта
-
-    def update(self, new_x, new_y):
-        """Обновляет координаты спрайта."""
-        if self.tag:
-            self.x = new_x
-            self.y = new_y
 
     def set_tag(self, tag):
         """Устанавливает тег спрайта."""
@@ -25,3 +19,8 @@ class sprite:
     def get_tag(self):
         """Возвращает тег спрайта."""
         return self.tag
+    def update(self, new_x, new_y):
+        """Обновляет координаты спрайта."""
+        if self.tag:
+            self.x = new_x
+            self.y = new_y

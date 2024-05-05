@@ -1,5 +1,5 @@
 import tkinter as tk
-class graphics(tk.Canvas):
+class Graphics(tk.Canvas):
     """Класс Canvas с дополнительными методами для работы со спрайтами."""
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -14,8 +14,12 @@ class graphics(tk.Canvas):
         sprite.y = y
         self.sprites.append(sprite)
         self.sprites.sort(key=lambda sprite: sprite.z)  # сортировка спрайтов по z-координате
-    # anchor='center'
-
+    def update(self):
+        """Перерисовывает все спрайты."""
+        for sprite in self.sprites:
+            self.tag_raise(sprite.get_tag())  # перемещаем спрайт на передний план
+            self.coords(sprite.get_tag(), sprite.x, sprite.y)
+            self.itemconfig(sprite.get_tag(), image=sprite.image)
     def change_sprite(self, sprite, new_image):
         """Изменяет изображение спрайта."""
         self.itemconfig(sprite.get_tag(), image=new_image)
