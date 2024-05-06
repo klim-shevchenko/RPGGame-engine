@@ -2,6 +2,7 @@ from rpg.graphics import *
 from rpg.sprite import *
 from rpg.game import *
 from rpg.area import *
+import time
 
 root = tk.Tk()
 root.geometry('1500x1500')
@@ -10,7 +11,7 @@ root.geometry('1500x1500')
 canvas = Graphics(root, width=1500, height=1500)
 
 # Создание экземпляра класса game
-first_game = Game()
+first_game = Game(canvas)
 house = Area()
 meadow = Area()
 
@@ -26,8 +27,8 @@ canvas.add_sprite(im2_1, 200, 100, 1)'''
 
 house.add_sprite(im1_1, 140, 140, 0)
 meadow.add_sprite(im1_2, 140, 140, 0)
-first_game.new_area(house)
-first_game.new_area(meadow)
+first_game.new_area('House', house)
+first_game.new_area('Meadow', meadow)
 canvas.update()
 
 # Функции, которые будут вызываться при нажатии кнопки
@@ -43,16 +44,12 @@ def on_button_click3():
     canvas.clear_all()'''
 def on_button_click4():
     canvas.clear_all()
-    first_game.set_area(house)
-    for sprite in house.sprites:
-        canvas.add_sprite(sprite, sprite.x, sprite.y, sprite.z)
+    first_game.set_area('House')
     canvas.update()
 
 def on_button_click5():
     canvas.clear_all()
-    first_game.set_area(meadow)
-    for sprite in meadow.sprites:
-        canvas.add_sprite(sprite, sprite.x, sprite.y, sprite.z)
+    first_game.set_area('Meadow')
     canvas.update()
 
 # Создание кнопки
