@@ -16,6 +16,8 @@ class Area():
     def add_object(self, obj):
         ''' добавляет объект в зону '''
         self.list_of_objects.append(obj)
+        self.sprites.append(obj.sprite)
+        self.add_sprite(obj.sprite, obj.pos_x, obj.pos_y, obj.pos_z)
 
     def check_obj_sprite(self):
         ''' проверяет координаты объекта '''

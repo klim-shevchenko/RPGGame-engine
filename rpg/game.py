@@ -5,11 +5,11 @@ class Game():
     def __init__(self, canvas, **params):
         self.rpg_dict_of_area = {} # словарь, хранящий в себе множество экземпляров класса Area, {number - ключ : name Area - значение}
         self.team_of_pc = [] # список, хранящий в себе имена экземпляров класса Actor с параметром category = "pc"
-        self.canvas = canvas
+        self.canvas = canvas # графика
 
     def new_area(self, name, area):
         ''' добавляет новую зону в список
-         param name - имя зоны '''
+         param name - имя зоны area - класс area()'''
         self.rpg_dict_of_area[name] = area
 
     def set_area(self, name):
@@ -17,6 +17,7 @@ class Game():
          param name - имя зоны '''
         if name in self.rpg_dict_of_area:
             area = self.rpg_dict_of_area[name]
+            self.canvas.clear_all()
             for sprite in area.sprites:
                 sprite.update(sprite.x, sprite.y)
                 self.canvas.add_sprite(sprite, sprite.x, sprite.y, sprite.z)
@@ -29,8 +30,8 @@ class Game():
         ''' добавляет новое заклинание '''
         self
 
-    def new_actor(self, name, **params):
-        ''' добавляет нового персонажа '''
+    def new_actor(self, name, actor, **params):
+        ''' создёт класс, потомок от Actor и создаёт поле из параметров, и установление их в начальные значения '''
         self
 
     def add_pc_to_team(self, pc):

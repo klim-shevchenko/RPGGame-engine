@@ -2,6 +2,7 @@ from rpg.graphics import *
 from rpg.sprite import *
 from rpg.game import *
 from rpg.area import *
+from rpg.actor import *
 import time
 
 root = tk.Tk()
@@ -18,15 +19,20 @@ meadow = Area()
 # Загрузка изображения
 im1_1 = Sprite(image='images/fon1.png')
 im1_2 = Sprite(image='images/fon2.png')
-'''im2_1 = sprite(image='images/person1.png')
-im2_2 = sprite(image='images/person2.png')'''
+im2_1 = Sprite(image='images/person1.png')
+im2_2 = Sprite(image='images/person2.png')
 
 '''# Добавление изображения на Canvas с помощью метода add_sprite
 canvas.add_sprite(im1_1, 140, 140, 0)
 canvas.add_sprite(im2_1, 200, 100, 1)'''
 
+actor1 = Actor("Person1", "NPC", "warrior", 1, "human", 10, 10, 10, 10,10,10, 200, 205, 1, im2_1)
+actor2 = Actor("Person2", "NPC", "warrior", 1, "human", 10, 10, 10, 10,10,10, 120, 185, 1, im2_2)
+
 house.add_sprite(im1_1, 140, 140, 0)
+house.add_object(actor1)
 meadow.add_sprite(im1_2, 140, 140, 0)
+meadow.add_object(actor2)
 first_game.new_area('House', house)
 first_game.new_area('Meadow', meadow)
 canvas.update()
@@ -43,14 +49,10 @@ def on_button_click2():
 def on_button_click3():
     canvas.clear_all()'''
 def on_button_click4():
-    canvas.clear_all()
     first_game.set_area('House')
-    canvas.update()
 
 def on_button_click5():
-    canvas.clear_all()
     first_game.set_area('Meadow')
-    canvas.update()
 
 # Создание кнопки
 '''button = tk.Button(root, text="поменять спрайт", command=on_button_click)
