@@ -1,12 +1,13 @@
 #from object import *
 class Actor():
-    def __init__(self, name, category, dnd_class, level, race, strange, agi, con, inteligence, wiz, charizma, x, y, z, sprite, **params):
+    def __init__(self, name, category, x, y, z, sprite, **params):
+        '''dnd_class, level, race, strange, agi, con, inteligence, wiz, charizma, - убрал эти параметры'''
         self.act_name = name # имя персонажа
+        self.act_category = category
         '''self.act_hp = hp
         self.act_ac = ac
         self.act_speed = speed
-        self.act_alive = True'''
-        self.act_category = category
+        self.act_alive = True       
         self.act_loot = () # список, хранящий экземпляры класса Item
         self.act_text = None # текстовое сообщение, которое будет у нпс
         self.act_dnd_class = dnd_class # текстовое значение, обозначение класса ("warrior" "wizard" "cleric")
@@ -19,11 +20,11 @@ class Actor():
         self.act_wiz = wiz # числовое значение, обозначающее показатель храктеристики "мудрость"
         self.act_charizma = charizma # числовое значение, обозначающее показатель храктеристики "харизма"
         self.act_inventory = () # список, хранящий в себе множество экземпляров классов Item
-        self.act_list_spells = () # список, хранящий в себе множество экземпляров классов Spell
-        self.sprite = sprite # спрайт персонажа, в будущем будет хранить в себе текущий кадр анимации.
+        self.act_list_spells = () # список, хранящий в себе множество экземпляров классов Spell'''
         self.pos_x = x #  числовое значение обозначающее расположение на экране, по координате x
         self.pos_y = y #  числовое значение обозначающее расположение на экране, по координате y
         self.pos_z = z #  числовое значение обозначающее расположение на экране, по координате z
+        self.sprite = sprite  # спрайт персонажа, в будущем будет хранить в себе текущий кадр анимации.
 
     def read_text(self, text):
         '''вывод содержимого поля act_text экземпляра класса Actor на экран'''

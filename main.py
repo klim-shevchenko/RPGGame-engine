@@ -26,15 +26,17 @@ im2_2 = Sprite(image='images/person2.png')
 canvas.add_sprite(im1_1, 140, 140, 0)
 canvas.add_sprite(im2_1, 200, 100, 1)'''
 
-actor1 = Actor("Person1", "NPC", "warrior", 1, "human", 10, 10, 10, 10,10,10, 200, 205, 1, im2_1)
-actor2 = Actor("Person2", "NPC", "warrior", 1, "human", 10, 10, 10, 10,10,10, 120, 185, 1, im2_2)
+#actor1 = Actor("Person1", "NPC", "warrior", 1, "human", 10, 10, 10, 10,10,10, 200, 205, 1, im2_1)
+#actor2 = Actor("Person2", "NPC", "warrior", 1, "human", 10, 10, 10, 10,10,10, 120, 185, 1, im2_2)
 
 house.add_sprite(im1_1, 140, 140, 0)
-house.add_object(actor1)
 meadow.add_sprite(im1_2, 140, 140, 0)
-meadow.add_object(actor2)
 first_game.new_area('House', house)
+knight = first_game.new_actor('Person1', 'NPC',200, 205, 1, im2_1)
+house.add_object(knight)
 first_game.new_area('Meadow', meadow)
+bandit = first_game.new_actor("Person2", "NPC", 120, 185, 1, im2_2)
+meadow.add_object(bandit)
 canvas.update()
 
 # Функции, которые будут вызываться при нажатии кнопки

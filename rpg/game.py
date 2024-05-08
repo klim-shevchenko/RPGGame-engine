@@ -1,6 +1,7 @@
 from rpg.area import *
 from rpg.graphics import *
 from rpg.sprite import *
+from rpg.actor import *
 class Game():
     def __init__(self, canvas, **params):
         self.rpg_dict_of_area = {} # словарь, хранящий в себе множество экземпляров класса Area, {number - ключ : name Area - значение}
@@ -22,6 +23,11 @@ class Game():
                 sprite.update(sprite.x, sprite.y)
                 self.canvas.add_sprite(sprite, sprite.x, sprite.y, sprite.z)
 
+    def new_actor(self, name, category,  x, y, z, sprite, **params):
+        ''' создёт класс, потомок от Actor и создаёт поле из параметров, и установление их в начальные значения '''
+        name = type(category, (Actor,), {})
+        return name(name, category, x, y, z, sprite)
+
     def new_item(self, name, **params):
         ''' добавляет новый предмет '''
         self
@@ -30,9 +36,6 @@ class Game():
         ''' добавляет новое заклинание '''
         self
 
-    def new_actor(self, name, actor, **params):
-        ''' создёт класс, потомок от Actor и создаёт поле из параметров, и установление их в начальные значения '''
-        self
 
     def add_pc_to_team(self, pc):
         ''' добавдяет персонажа в команду '''
