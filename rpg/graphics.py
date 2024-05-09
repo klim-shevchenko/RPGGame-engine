@@ -6,7 +6,8 @@ class Graphics(tk.Canvas):
         self.sprites = []  # список спрайтов
 
     def add_sprite(self, sprite, x, y, z, **kwargs):
-        """Добавляет спрайт на Canvas."""
+        """Добавляет спрайт на Canvas.
+        param sprite - экземпляр спрайта, x y z - коодринаты."""
         tag = self.create_image(x, y, image=sprite.image, anchor='center', **kwargs)
         sprite.set_tag(tag)
         sprite.set_z(z)  # устанавливаем z-координату спрайта
@@ -21,12 +22,14 @@ class Graphics(tk.Canvas):
             self.coords(sprite.get_tag(), sprite.x, sprite.y)
             self.itemconfig(sprite.get_tag(), image=sprite.image)
     def change_sprite(self, sprite, new_image):
-        """Изменяет изображение спрайта."""
+        """Изменяет изображение спрайта.
+        param sprite - экземпляр спрайта, new_image = новое изображение."""
         self.itemconfig(sprite.get_tag(), image=new_image)
         sprite.image=new_image
 
     def delete_sprite(self, sprite):
-        """Удаляет спрайт с Canvas."""
+        """Удаляет спрайт с Canvas.
+        param sprite - экземпляр спрайта."""
         self.delete(sprite.get_tag())
         self.sprites.remove(sprite)
 

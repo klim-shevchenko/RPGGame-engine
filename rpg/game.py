@@ -14,8 +14,8 @@ class Game():
         self.rpg_dict_of_area[name] = area
 
     def set_area(self, name):
-        ''' устанавливает текущую зону, загружает графику зоны
-         param name - имя зоны '''
+        ''' устанавливает текущую зону, загружает графику зоны.
+         param name - имя зоны.'''
         if name in self.rpg_dict_of_area:
             area = self.rpg_dict_of_area[name]
             self.canvas.clear_all()
@@ -23,10 +23,14 @@ class Game():
                 sprite.update(sprite.x, sprite.y)
                 self.canvas.add_sprite(sprite, sprite.x, sprite.y, sprite.z)
 
-    def new_actor(self, name, category,  x, y, z, sprite, **params):
-        ''' создёт класс, потомок от Actor и создаёт поле из параметров, и установление их в начальные значения '''
-        name = type(category, (Actor,), {})
-        return name(name, category, x, y, z, sprite)
+    def new_actor(self, name, **params):
+        ''' создёт класс, потомок от Actor и создаёт поле из параметров, и установление их в начальные значения.
+        params name - название нового класса, **params - поля нового класса
+        return - новый класс'''
+        class_attributes = {}
+        for key, value in params.items():
+            class_attributes[key] = value
+        return type(name, (Actor,), class_attributes)
 
     def new_item(self, name, **params):
         ''' добавляет новый предмет '''

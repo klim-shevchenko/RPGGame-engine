@@ -1,10 +1,11 @@
 #from object import *
 class Actor():
-    def __init__(self, name, category, x, y, z, sprite, **params):
-        '''dnd_class, level, race, strange, agi, con, inteligence, wiz, charizma, - убрал эти параметры'''
-        self.act_name = name # имя персонажа
+    def __init__(self, x = 0, y = 0, z = 0, **params):
+        '''def __init__(self, name, category, x, y, z, sprite, **params):
+        dnd_class, level, race, strange, agi, con, inteligence, wiz, charizma, - убрал эти параметры'''
+        '''self.act_name = name # имя персонажа
         self.act_category = category
-        '''self.act_hp = hp
+        self.act_hp = hp
         self.act_ac = ac
         self.act_speed = speed
         self.act_alive = True       
@@ -24,7 +25,7 @@ class Actor():
         self.pos_x = x #  числовое значение обозначающее расположение на экране, по координате x
         self.pos_y = y #  числовое значение обозначающее расположение на экране, по координате y
         self.pos_z = z #  числовое значение обозначающее расположение на экране, по координате z
-        self.sprite = sprite  # спрайт персонажа, в будущем будет хранить в себе текущий кадр анимации.
+        #self.sprite = sprite  # спрайт персонажа, в будущем будет хранить в себе текущий кадр анимации.
 
     def read_text(self, text):
         '''вывод содержимого поля act_text экземпляра класса Actor на экран'''
