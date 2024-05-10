@@ -7,6 +7,7 @@ class Game():
         self.rpg_dict_of_area = {} # словарь, хранящий в себе множество экземпляров класса Area, {number - ключ : name Area - значение}
         self.team_of_pc = [] # список, хранящий в себе имена экземпляров класса Actor с параметром category = "pc"
         self.canvas = canvas # графика
+        self.current_area = None # параметр хранящий, текущую зону
 
     def new_area(self, name, area):
         ''' добавляет новую зону в список
@@ -26,7 +27,7 @@ class Game():
     def new_actor(self, name, **params):
         ''' создёт класс, потомок от Actor и создаёт поле из параметров, и установление их в начальные значения.
         params name - название нового класса, **params - поля нового класса
-        return - новый класс'''
+        return - новый класс '''
         class_attributes = {}
         for key, value in params.items():
             class_attributes[key] = value
@@ -43,7 +44,9 @@ class Game():
 
     def add_pc_to_team(self, pc):
         ''' добавдяет персонажа в команду '''
-        self
+        if pc.category == "pc":
+            self.team_of_pc.append(pc)
+        else: print('попытка добавить персонажа в команду не успешна')
 
     def remove_pc_from_team(self, pc):
         ''' удаляет персонажа из команды '''
@@ -56,3 +59,13 @@ class Game():
     def stop_thread(script):
         '''остановливает скрипт '''
         script
+    def set_team(self, area, x, y, z):
+        ''' устанавливает команду. '''
+        for elememt in self.team_of_pc:
+            if elememt in area.list_of_actors:
+                elememt.pos_x = x
+                elememt.pos_y = y
+                elememt.pos_z = z
+            else:
+                area.add_object(elememt, x, y, z)
+                self.canvas.add_sprite(elememt.sprite, elememt.sprite.x, elememt.sprite.y, elememt.sprite.z)
