@@ -16,13 +16,13 @@ class Area():
         ''' добавляет объект в зону
         param obj - объект, x y z - коодринаты '''
         obj.pos_x = x
-        obj.pos_x = y
-        obj.pos_x = z
+        obj.pos_y = y
+        obj.pos_z = z
         if obj.category == None:
             self.list_of_objects.append(obj)
         else:
             self.list_of_actors.append(obj)
-        self.add_sprite(obj.sprite, x, y, z)
+        self.add_sprite(obj.sprite, obj.pos_x, y, z)
 
     def check_obj_sprite(self):
         ''' проверяет координаты объекта '''

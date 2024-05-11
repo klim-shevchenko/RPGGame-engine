@@ -18,9 +18,9 @@ class Game():
         ''' устанавливает текущую зону, загружает графику зоны.
          param name - имя зоны.'''
         if name in self.rpg_dict_of_area:
-            area = self.rpg_dict_of_area[name]
+            self.current_area = self.rpg_dict_of_area[name]
             self.canvas.clear_all()
-            for sprite in area.sprites:
+            for sprite in self.current_area.sprites:
                 sprite.update(sprite.x, sprite.y)
                 self.canvas.add_sprite(sprite, sprite.x, sprite.y, sprite.z)
 
@@ -66,7 +66,7 @@ class Game():
                 elememt.pos_x = x
                 elememt.pos_y = y
                 elememt.pos_z = z
-                elememt.sprite.update(x, y)
+                elememt.sprite.update(elememt.pos_x, elememt.pos_y)
             else:
                 area.add_object(elememt, x, y, z)
                 self.canvas.add_sprite(elememt.sprite, elememt.sprite.x, elememt.sprite.y, elememt.sprite.z)

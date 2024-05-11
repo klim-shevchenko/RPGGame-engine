@@ -1,4 +1,6 @@
 #from object import *
+import time
+
 class Actor():
     def __init__(self, x = 0, y = 0, z = 0, **params):
         '''def __init__(self, name, category, x, y, z, sprite, **params):
@@ -40,3 +42,15 @@ class Actor():
 
     def target_use_item(self, item, target):
         ''' вызов метода use\_item экземпляра класса Item'''
+    def position_update(self, x, y, speed, sprite):
+        '''изменяет координаты персонажа'''
+        while self.pos_x != x or self.pos_y != y:
+            if x > self.pos_x:
+                self.pos_x+=speed
+            if x < self.pos_x:
+                self.pos_x-=speed
+            if y > self.pos_y:
+                self.pos_y+=speed
+            if y < self.pos_y:
+                self.pos_y-=speed
+            sprite.update(self.pos_x, self.pos_y)

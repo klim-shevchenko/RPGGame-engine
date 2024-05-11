@@ -4,14 +4,12 @@ from rpg.game import *
 from rpg.area import *
 from rpg.actor import *
 import time
+import threading
+import mouse
 
 root = tk.Tk()
 root.geometry('1500x1500')
 
-def mouse_left_click(event):
-    print("Left mouse button clicked at", event.x, event.y)
-
-root.bind("<Button-1>", mouse_left_click)
 
 # Создание экземпляра класса graphics, который будет взаимодействовать с окном
 canvas = Graphics(root, width=1500, height=1500)
@@ -37,7 +35,7 @@ canvas.add_sprite(im2_1, 200, 100, 1)'''
 house.add_sprite(Sprite('images/fon1.png'), 140, 140, 0)
 meadow.add_sprite(Sprite('images/fon2.png'), 240, 140, 0)
 first_game.new_area('House', house)
-Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10, sprite=Sprite('images/person1.png'))
+Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10, speed = 1, sprite=Sprite('images/person1.png'))
 k = Knight()
 first_game.add_pc_to_team(k)
 #house.add_object(k, 250, 250, 1)
@@ -60,16 +58,18 @@ def on_button_click2():
     canvas.update()
 def on_button_click3():
     canvas.clear_all()'''
+first_game.set_area('House')
+first_game.set_team(house,400, 120, 1)
 def on_button_click4():
     first_game.set_area('House')
     first_game.set_team(house,400, 20, 1)
     print(house.list_of_actors)
-    canvas.update()
+    #canvas.update()
 
 def on_button_click5():
     first_game.set_area('Meadow')
     first_game.set_team(meadow,100, 260, 1)
-    canvas.update()
+    #canvas.update()
 
 # Создание кнопки
 '''button = tk.Button(root, text="поменять спрайт", command=on_button_click)
@@ -79,6 +79,13 @@ button3 = tk.Button(root, text="очистить всё", command=on_button_clic
 button4 = tk.Button(root, text="установить новую зону дом", command=on_button_click4)
 button5 = tk.Button(root, text="установить новую зону луг", command=on_button_click5)
 
+# обрабока клика мыши
+def mouse_left_click(event):
+    print("Left mouse button clicked at", event.x, event.y)
+    k.position_update(event.x, event.y, k.speed, k.sprite)
+    canvas.update()
+root.bind("<Button-1>", mouse_left_click)
+
 # Размещение кнопки на окне
 '''button.pack()
 button1.pack()
@@ -87,5 +94,6 @@ button3.pack()'''
 button4.pack()
 button5.pack()
 canvas.pack()
+
 # Основной цикл обработки событий
 root.mainloop()
