@@ -66,6 +66,7 @@ class Game():
                 elememt.pos_x = x
                 elememt.pos_y = y
                 elememt.pos_z = z
+                elememt.sprite.update(x, y)
             else:
                 area.add_object(elememt, x, y, z)
                 self.canvas.add_sprite(elememt.sprite, elememt.sprite.x, elememt.sprite.y, elememt.sprite.z)
