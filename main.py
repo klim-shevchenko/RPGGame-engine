@@ -3,13 +3,20 @@ from rpg.sprite import *
 from rpg.game import *
 from rpg.area import *
 from rpg.actor import *
-import time
+import datetime
 import threading
-import mouse
+
+def timer():
+    first_game.update()
+    root.after(1000, timer)
 
 root = tk.Tk()
 root.geometry('1500x1500')
 
+#root.after(1000, timer)
+
+exit_button = tk.Button(root, text="Exit", fg="red", command=root.destroy)
+exit_button.pack()
 
 # Создание экземпляра класса graphics, который будет взаимодействовать с окном
 canvas = Graphics(root, width=1500, height=1500)
@@ -84,7 +91,7 @@ def mouse_left_click(event):
     print("Left mouse button clicked at", event.x, event.y)
     k.position_update(event.x, event.y, k.speed, k.sprite)
     canvas.update()
-root.bind("<Button-1>", mouse_left_click)
+#root.bind("<Button-1>", mouse_left_click)
 
 # Размещение кнопки на окне
 '''button.pack()
@@ -94,6 +101,6 @@ button3.pack()'''
 button4.pack()
 button5.pack()
 canvas.pack()
-
+root.after(1000, timer)
 # Основной цикл обработки событий
 root.mainloop()

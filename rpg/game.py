@@ -50,7 +50,10 @@ class Game():
 
     def remove_pc_from_team(self, pc):
         ''' удаляет персонажа из команды '''
-        self
+        if pc.category == "pc":
+            self.team_of_pc.remove(pc)
+        else:
+            print('попытка удалить персонажа из команды не успешна')
 
     def start_script(script):
         ''' активирует скрипт '''
@@ -70,3 +73,8 @@ class Game():
             else:
                 area.add_object(elememt, x, y, z)
                 self.canvas.add_sprite(elememt.sprite, elememt.sprite.x, elememt.sprite.y, elememt.sprite.z)
+
+    def update(self):
+        ''' вызывается в таймере для обновления всех переменных в текущей зоне. '''
+        self.current_area.update()
+        self.canvas.update()

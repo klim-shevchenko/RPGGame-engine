@@ -28,4 +28,8 @@ class Area():
         ''' проверяет координаты объекта '''
         self
 
-
+    def update(self):
+        '''изменяет проверяет изменение всех персонажей в зоне'''
+        for actor in self.list_of_actors:
+            if actor.category == 'pc':
+                actor.position_update(actor.pos_x + 4, actor.pos_y + 4, actor.speed, actor.sprite)

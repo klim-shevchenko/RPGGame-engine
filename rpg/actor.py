@@ -42,15 +42,26 @@ class Actor():
 
     def target_use_item(self, item, target):
         ''' вызов метода use\_item экземпляра класса Item'''
-    def position_update(self, x, y, speed, sprite):
+    def position_update(self, new_x, new_y, speed, sprite):
         '''изменяет координаты персонажа'''
-        while self.pos_x != x or self.pos_y != y:
-            if x > self.pos_x:
-                self.pos_x+=speed
-            if x < self.pos_x:
-                self.pos_x-=speed
-            if y > self.pos_y:
-                self.pos_y+=speed
-            if y < self.pos_y:
-                self.pos_y-=speed
-            sprite.update(self.pos_x, self.pos_y)
+        vec_x = new_x - self.pos_x
+        vec_y = new_y - self.pos_y
+        maximum = max(abs(vec_x), abs(vec_y))
+        normal_x = float(vec_x/maximum)
+        normal_y = float(vec_y/maximum)
+        if self.pos_x != new_x or self.pos_y != new_y:
+            if self.pos_x != new_x:
+                self.pos_x += normal_x*speed
+            if self.pos_y != new_y:
+                self.pos_y += normal_y*speed
+        sprite.update(self.pos_x, self.pos_y)
+        '''while self.pos_x != new_x or self.pos_y != new_y:
+            if new_x > self.pos_x:
+                self.pos_x += speed
+            if new_x < self.pos_x:
+                self.pos_x -= speed
+            if new_y > self.pos_y:
+                self.pos_y += speed
+            if new_y < self.pos_y:
+                self.pos_y -= speed
+            sprite.update(self.pos_x, self.pos_y)'''
