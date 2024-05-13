@@ -3,10 +3,11 @@ from rpg.graphics import *
 from rpg.sprite import *
 from rpg.actor import *
 class Game():
-    def __init__(self, canvas, **params):
+    def __init__(self, canvas, window, **params):
         self.rpg_dict_of_area = {} # словарь, хранящий в себе множество экземпляров класса Area, {number - ключ : name Area - значение}
         self.team_of_pc = [] # список, хранящий в себе имена экземпляров класса Actor с параметром category = "pc"
         self.canvas = canvas # графика
+        self.window = window # окно для графики
         self.current_area = None # параметр хранящий, текущую зону
 
     def new_area(self, name, area):
@@ -78,3 +79,8 @@ class Game():
         ''' вызывается в таймере для обновления всех переменных в текущей зоне. '''
         self.current_area.update()
         self.canvas.update()
+
+    def timer(self):
+        '''таймер дожен вызывать метод update постоянно'''
+        self.update()
+        self.window.after(1000, self.timer())
