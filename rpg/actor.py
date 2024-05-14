@@ -8,7 +8,7 @@ class Actor():
         self.act_category = category
         self.act_hp = hp
         self.act_ac = ac
-        self.act_speed = speed
+        
         self.act_alive = True       
         self.act_loot = () # список, хранящий экземпляры класса Item
         self.act_text = None # текстовое сообщение, которое будет у нпс
@@ -26,6 +26,8 @@ class Actor():
         self.pos_x = x #  числовое значение обозначающее расположение на экране, по координате x
         self.pos_y = y #  числовое значение обозначающее расположение на экране, по координате y
         self.pos_z = z #  числовое значение обозначающее расположение на экране, по координате z
+        self.speed_x = 0
+        self.speed_y = 0
 
     def read_text(self, text):
         '''вывод содержимого поля act_text экземпляра класса Actor на экран'''
@@ -42,8 +44,8 @@ class Actor():
         ''' вызов метода use\_item экземпляра класса Item'''
     def update(self):
         '''изменяет координаты персонажа'''
-        self.pos_x += self.speed
-        self.pos_y += self.speed
+        self.pos_x += self.speed_x
+        self.pos_y += self.speed_y
         self.sprite.update(self.pos_x, self.pos_y)
         '''vec_x = new_x - self.pos_x
         vec_y = new_y - self.pos_y
