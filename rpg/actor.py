@@ -58,3 +58,16 @@ class Actor():
             if self.pos_y != new_y:
                 self.pos_y += normal_y*self.speed
         self.sprite.update(self.pos_x, self.pos_y)'''
+    def search_position(self, new_x, new_y):
+        '''метод который изменяет направление движения у персонажа'''
+        if self.pos_x != new_x and self.pos_y != new_y:
+            vec_x = new_x - self.pos_x
+            vec_y = new_y - self.pos_y
+            maximum = max(abs(vec_x), abs(vec_y))
+            normal_x = float(vec_x/maximum)
+            normal_y = float(vec_y/maximum)
+            self.speed_x = normal_x
+            self.speed_y = normal_y
+        else:
+            self.speed_x = 0
+            self.speed_y = 0

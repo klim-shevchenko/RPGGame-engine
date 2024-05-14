@@ -62,9 +62,8 @@ button5 = tk.Button(root, text="установить новую зону луг"
 # обрабока клика мыши
 def mouse_left_click(event):
     print("Left mouse button clicked at", event.x, event.y)
-    k.position_update(event.x, event.y, k.speed, k.sprite)
-    canvas.update()
-#root.bind("<Button-1>", mouse_left_click)
+    k.search_position(event.x, event.y)
+root.bind("<Button-1>", mouse_left_click)
 
 # Размещение кнопки на окне
 button4.pack()
