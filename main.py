@@ -4,7 +4,7 @@ from rpg.game import *
 from rpg.area import *
 from rpg.actor import *
 import datetime
-#import threading
+from rpg.rectangle import *
 
 def timer():
     first_game.update()
@@ -64,7 +64,12 @@ def mouse_left_click(event):
     print("Left mouse button clicked at", event.x, event.y)
     if event.y <= 500 and event.x <=500:
         k.search_position(event.x, event.y)
-root.bind("<Button-1>", mouse_left_click)
+canvas.bind("<Button-1>", mouse_left_click)
+
+
+# Создаем экземпляр класса MyRectangle
+rect = MyRectangle(canvas, 50, 100, 150, 200, "blue")
+
 
 # Размещение кнопки на окне
 exit_button.place(x = 700,y = 60)
