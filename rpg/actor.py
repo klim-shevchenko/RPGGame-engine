@@ -26,8 +26,10 @@ class Actor():
         self.pos_x = x #  числовое значение обозначающее расположение на экране, по координате x
         self.pos_y = y #  числовое значение обозначающее расположение на экране, по координате y
         self.pos_z = z #  числовое значение обозначающее расположение на экране, по координате z
-        self.speed_x = 0
-        self.speed_y = 0
+        self.speed_x = 0 #  значение скорости x
+        self.speed_y = 0 #  значение скорости y
+        self.target_x = 0
+        self.target_y = 0
 
     def read_text(self, text):
         '''вывод содержимого поля act_text экземпляра класса Actor на экран'''
@@ -44,23 +46,16 @@ class Actor():
         ''' вызов метода use\_item экземпляра класса Item'''
     def update(self):
         '''изменяет координаты персонажа'''
-        self.pos_x += self.speed_x
-        self.pos_y += self.speed_y
+        #if (self.pos_x in range(self.new_position_x-10, self.new_position_x+10) and self.pos_y in range(self.new_position_y-10, self.new_position_y+10)):
+        if  ((self.pos_x >= self.target_x+10) or (self.pos_x <= self.target_x-10)) or ((self.pos_y >= self.target_y+10) or (self.pos_y <= self.target_y-10)):
+            self.pos_x += self.speed_x
+            self.pos_y += self.speed_y
         self.sprite.update(self.pos_x, self.pos_y)
-        '''vec_x = new_x - self.pos_x
-        vec_y = new_y - self.pos_y
-        maximum = max(abs(vec_x), abs(vec_y))
-        normal_x = float(vec_x/maximum)
-        normal_y = float(vec_y/maximum)
-        if self.pos_x != new_x or self.pos_y != new_y:
-            if self.pos_x != new_x:
-                self.pos_x += normal_x*self.speed
-            if self.pos_y != new_y:
-                self.pos_y += normal_y*self.speed
-        self.sprite.update(self.pos_x, self.pos_y)'''
     def search_position(self, new_x, new_y):
-        '''метод который изменяет направление движения у персонажа'''
+        '''Изменяет направление движения у персонажа'''
         if self.pos_x != new_x and self.pos_y != new_y:
+            self.target_x = new_x
+            self.target_y = new_y
             vec_x = new_x - self.pos_x
             vec_y = new_y - self.pos_y
             maximum = max(abs(vec_x), abs(vec_y))

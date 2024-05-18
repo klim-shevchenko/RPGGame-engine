@@ -4,17 +4,17 @@ from rpg.game import *
 from rpg.area import *
 from rpg.actor import *
 import datetime
-import threading
+#import threading
 
 def timer():
     first_game.update()
-    root.after(1000, timer)
+    root.after(50, timer)
 
 root = tk.Tk()
 root.geometry('1500x1500')
 
 exit_button = tk.Button(root, text="Exit", fg="red", command=root.destroy)
-exit_button.pack()
+#exit_button.pack()
 
 # Создание экземпляра класса graphics, который будет взаимодействовать с окном
 canvas = Graphics(root, width=1500, height=1500)
@@ -45,7 +45,7 @@ print(house.list_of_actors)
 # Функции, которые будут вызываться при нажатии кнопки
 
 first_game.set_area('House')
-first_game.set_team(house,400, 120, 1)
+first_game.set_team(house,270, 120, 1)
 def on_button_click4():
     first_game.set_area('House')
     first_game.set_team(house,400, 20, 1)
@@ -62,13 +62,15 @@ button5 = tk.Button(root, text="установить новую зону луг"
 # обрабока клика мыши
 def mouse_left_click(event):
     print("Left mouse button clicked at", event.x, event.y)
-    k.search_position(event.x, event.y)
+    if event.y <= 500 and event.x <=500:
+        k.search_position(event.x, event.y)
 root.bind("<Button-1>", mouse_left_click)
 
 # Размещение кнопки на окне
+exit_button.place(x = 700,y = 60)
 button4.pack()
 button5.pack()
-canvas.pack()
+canvas.place(height = 1500, width =1500)
 root.after(1000, timer)
 # Основной цикл обработки событий
 root.mainloop()
