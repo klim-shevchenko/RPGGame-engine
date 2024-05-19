@@ -67,8 +67,14 @@ def mouse_left_click(event):
 canvas.bind("<Button-1>", mouse_left_click)
 
 
-# Создаем экземпляр класса MyRectangle
-rect = MyRectangle(canvas, 50, 100, 150, 200, "blue")
+#экземпляры класса MyRectangle
+rect1 = MyRectangle(0, 0, 4, 4)
+rect2 = MyRectangle(1, 1, 2, 2)
+
+if rect2.is_in(rect1):
+    print("Прямоугольник rect2 находится внутри прямоугольника rect1")
+else:
+    print("Прямоугольник rect2 не находится внутри прямоугольника rect1")
 
 
 # Размещение кнопки на окне
