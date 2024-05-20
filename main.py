@@ -68,8 +68,8 @@ canvas.bind("<Button-1>", mouse_left_click)
 
 
 #экземпляры класса MyRectangle
-rect1 = MyRectangle(0, 0, 4, 4)
-rect2 = MyRectangle(1, 1, 2, 2)
+rect1 = Rectangle(0, 0, 4, 4)
+rect2 = Rectangle(1, 1, 2, 2)
 
 if rect2.is_in(rect1):
     print("Прямоугольник rect2 находится внутри прямоугольника rect1")

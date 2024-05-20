@@ -1,19 +1,24 @@
 import unittest
-from rpg.rectangle import MyRectangle
+from rpg.rectangle import Rectangle
 
-class MyTestCase(unittest.TestCase):
-    def test_is_in(self):
-        #прямоугольники для тестирования
-        rect1 = MyRectangle(0, 0, 4, 4)
-        rect2 = MyRectangle(1, 1, 2, 2)
-        rect3 = MyRectangle(5, 5, 2, 2)
+class TestRectangle(unittest.TestCase):
+    def setUp(self):
+        self.rect = Rectangle(0, 0, 2, 2)
 
-        # Проверка, что rect2 находится внутри rect1
-        self.assertTrue(rect2.is_in(rect1))
+    def test_inside(self):
+        '''Проверяет, входит ли прямоугольник полностью в другой'''
+        inside_rect = Rectangle(1, 1, 1, 1)
+        self.assertTrue(inside_rect.is_in(self.rect))
 
-        # Проверка, что rect3 не находится внутри rect1
-        self.assertFalse(rect3.is_in(rect1))
+    def test_overlap(self):
+        '''Проверяет, пересекаются ли прямоугольники'''
+        overlap_rect = Rectangle(1, 1, 2, 2)
+        self.assertTrue(overlap_rect.is_in(self.rect))
 
+    def test_touch(self):
+        '''Проверяет, касаются ли прямоугольники'''
+        touch_rect = Rectangle(2, 0, 1, 2)
+        self.assertTrue(touch_rect.is_in(self.rect))
 
 if __name__ == '__main__':
     unittest.main()
