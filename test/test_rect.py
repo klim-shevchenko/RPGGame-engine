@@ -16,6 +16,11 @@ class TestRectangle(unittest.TestCase):
         rect_inside = Rectangle(2, 2, 2, 2)
         self.assertFalse(self.rect.is_in(rect_inside))
 
+    def test_apartside(self):
+        '''Тест: прямоугольник отдельно от другого'''
+        rect_apart = Rectangle(6, 6, 2, 2)
+        self.assertFalse(self.rect.is_in(rect_apart))
+
     def test_touching_left(self):
         '''Тест: прямоугольник касается слева'''
         touching_left = Rectangle(0, 2, 1, 1)
@@ -38,22 +43,22 @@ class TestRectangle(unittest.TestCase):
 
     def test_intersect_left(self):
         '''Тест: пересечение прямоугольника слева'''
-        intersect_left = Rectangle(0, 2, 1, 1)
+        intersect_left = Rectangle(0, 2, 3, 2)
         self.assertTrue(self.rect.is_in(intersect_left))
 
     def test_intersect_right(self):
         '''Тест: пересечение прямоугольника справа'''
-        intersect_right = Rectangle(5, 2, 1, 1)
+        intersect_right = Rectangle(3, 2, 3, 2)
         self.assertTrue(self.rect.is_in(intersect_right))
 
     def test_intersect_top(self):
         '''Тест: пересечение прямоугольника сверху'''
-        intersect_top = Rectangle(2, 5, 1, 1)
+        intersect_top = Rectangle(2, 3, 2, 3)
         self.assertTrue(self.rect.is_in(intersect_top))
 
     def test_intersect_bottom(self):
         '''Тест: пересечение прямоугольника снизу'''
-        intersect_bottom = Rectangle(2, 0, 1, 1)
+        intersect_bottom = Rectangle(2, 0, 2, 3)
         self.assertTrue(self.rect.is_in(intersect_bottom))
 
 if __name__ == '__main__':
