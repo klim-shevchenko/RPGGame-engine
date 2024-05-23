@@ -8,7 +8,6 @@ class Actor():
         self.act_category = category
         self.act_hp = hp
         self.act_ac = ac
-        
         self.act_alive = True       
         self.act_loot = () # список, хранящий экземпляры класса Item
         self.act_text = None # текстовое сообщение, которое будет у нпс
@@ -66,3 +65,11 @@ class Actor():
         else:
             self.speed_x = 0
             self.speed_y = 0
+    def stop_move(self):
+        '''останавливает движение персонажа'''
+        self.pos_x -= self.speed_x
+        self.pos_y -= self.speed_y
+        self.target_x = self.pos_x
+        self.target_y = self.pos_y
+        self.speed_x = 0
+        self.speed_y = 0

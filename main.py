@@ -14,7 +14,6 @@ root = tk.Tk()
 root.geometry('1500x1500')
 
 exit_button = tk.Button(root, text="Exit", fg="red", command=root.destroy)
-#exit_button.pack()
 
 # Создание экземпляра класса graphics, который будет взаимодействовать с окном
 canvas = Graphics(root, width=1500, height=1500)
@@ -27,15 +26,17 @@ meadow = Area()
 # Загрузка изображения в зоны, добавление зон в игру
 
 house.add_sprite(Sprite('images/fon1.png'), 140, 140, 0)
-meadow.add_sprite(Sprite('images/fon2.png'), 240, 140, 0)
+house.add_rect(Rectangle(x =0, y = 0, width=500, height=500))
+meadow.add_sprite(Sprite('images/fon2.png'), 140, 140, 0)
+meadow.add_rect(Rectangle(x =0, y = 0, width=500, height=500))
 first_game.new_area('House', house)
-Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10, sprite=Sprite('images/person1.png'))
+Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10, sprite=Sprite('images/mage_0_0.png'))
 k = Knight()
 first_game.add_pc_to_team(k)
 k.speed_x = 2
 k.speed_y = 1
 first_game.new_area('Meadow', meadow)
-Bandit = first_game.new_actor("Bandit", category="NPC", strange=12, wizdom=8, sprite=Sprite('images/person2.png'))
+Bandit = first_game.new_actor("Bandit", category="NPC", strange=12, wizdom=8, sprite=Sprite('images/npc_dr_knight_0 #176474.png'))
 b = Bandit()
 meadow.add_object(b, 320, 185, 1)
 canvas.update()
@@ -66,22 +67,11 @@ def mouse_left_click(event):
         k.search_position(event.x, event.y)
 canvas.bind("<Button-1>", mouse_left_click)
 
-
-#экземпляры класса MyRectangle
-rect1 = Rectangle(0, 0, 4, 4)
-rect2 = Rectangle(1, 1, 2, 2)
-
-if rect2.is_in(rect1):
-    print("Прямоугольник rect2 находится внутри прямоугольника rect1")
-else:
-    print("Прямоугольник rect2 не находится внутри прямоугольника rect1")
-
-
 # Размещение кнопки на окне
-exit_button.place(x = 700,y = 60)
-button4.pack()
-button5.pack()
-canvas.place(height = 1500, width =1500)
+exit_button.place(x = 1201,y = 60)
+button4.place(x = 1201,y = 0)
+button5.place(x = 1201,y = 30)
+canvas.place(height = 700, width =700)
 root.after(1000, timer)
 # Основной цикл обработки событий
 root.mainloop()
