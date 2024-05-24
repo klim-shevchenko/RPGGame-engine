@@ -30,7 +30,7 @@ house.add_rect(Rectangle(x =0, y = 0, width=500, height=500))
 meadow.add_sprite(Sprite('images/fon2.png'), 140, 140, 0)
 meadow.add_rect(Rectangle(x =0, y = 0, width=500, height=500))
 first_game.new_area('House', house)
-Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10, sprite=Sprite('images/mage_0_0.png'))
+Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10, sprite=Sprite('images/mage_0_0.png') )
 k = Knight()
 first_game.add_pc_to_team(k)
 k.speed_x = 2

@@ -35,7 +35,11 @@ class Area():
     def update(self):
         '''изменяет проверяет изменение всех персонажей в зоне'''
         for actor in self.list_of_actors:
-            if actor.pos_y <= self.rectangles.height and actor.pos_x <= self.rectangles.width:
+            if actor.rectangle.is_in(self.rectangles):
                 actor.update()
             else:
                 actor.stop_move()
+            '''if actor.pos_y <= self.rectangles.height and actor.pos_x <= self.rectangles.width:
+                actor.update()
+            else:
+                actor.stop_move()'''

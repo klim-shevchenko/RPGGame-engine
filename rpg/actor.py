@@ -1,6 +1,6 @@
 #from object import *
 import time
-
+from rpg.rectangle import *
 class Actor():
     def __init__(self, x = 0, y = 0, z = 0, **params):
         '''класс Actor для работы с персонажем'''
@@ -29,6 +29,7 @@ class Actor():
         self.speed_y = 0 #  значение скорости y
         self.target_x = 0
         self.target_y = 0
+        self.rectangle = Rectangle(self.pos_x, self.pos_y, 32, 32)
 
     def read_text(self, text):
         '''вывод содержимого поля act_text экземпляра класса Actor на экран'''
@@ -49,6 +50,8 @@ class Actor():
         if  ((self.pos_x >= self.target_x+10) or (self.pos_x <= self.target_x-10)) or ((self.pos_y >= self.target_y+10) or (self.pos_y <= self.target_y-10)):
             self.pos_x += self.speed_x
             self.pos_y += self.speed_y
+            self.rectangle.x = self.pos_x
+            self.rectangle.y = self.pos_y
         self.sprite.update(self.pos_x, self.pos_y)
     def search_position(self, new_x, new_y):
         '''Изменяет направление движения у персонажа'''
@@ -71,5 +74,7 @@ class Actor():
         self.pos_y -= self.speed_y
         self.target_x = self.pos_x
         self.target_y = self.pos_y
+        self.rectangle.x = self.pos_x
+        self.rectangle.y = self.pos_y
         self.speed_x = 0
         self.speed_y = 0
