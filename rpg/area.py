@@ -39,7 +39,3 @@ class Area():
                 actor.update()
             else:
                 actor.stop_move()
-            '''if actor.pos_y <= self.rectangles.height and actor.pos_x <= self.rectangles.width:
-                actor.update()
-            else:
-                actor.stop_move()'''

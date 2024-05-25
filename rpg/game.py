@@ -2,6 +2,7 @@ from rpg.area import *
 from rpg.graphics import *
 from rpg.sprite import *
 from rpg.actor import *
+import threading
 class Game():
     def __init__(self, canvas, window, **params):
         self.rpg_dict_of_area = {} # словарь, хранящий в себе множество экземпляров класса Area, {number - ключ : name Area - значение}
@@ -9,6 +10,7 @@ class Game():
         self.canvas = canvas # графика
         self.window = window # окно для графики
         self.current_area = None # параметр хранящий, текущую зону
+        self.canvas.bind("<Button-1>", self.mouse_left_click)
 
     def new_area(self, name, area):
         ''' добавляет новую зону в список
@@ -42,7 +44,6 @@ class Game():
         ''' добавляет новое заклинание '''
         self
 
-
     def add_pc_to_team(self, pc):
         ''' добавдяет персонажа в команду '''
         if pc.category == "pc":
@@ -56,9 +57,10 @@ class Game():
         else:
             print('попытка удалить персонажа из команды не успешна')
 
-    def start_script(script):
+    def start_script(self, script):
         ''' активирует скрипт '''
-        script
+        knight_thread = threading.Thread(target=script)
+        knight_thread.daemon = True
 
     def stop_thread(script):
         '''остановливает скрипт '''
@@ -84,3 +86,8 @@ class Game():
         '''таймер дожен вызывать метод update постоянно'''
         self.update()
         self.window.after(1000, self.timer())
+
+    def mouse_left_click(self, event):
+        for actor in self.current_area.list_of_actors:
+            if actor.category == 'pc':
+                actor.search_position(event.x, event.y)
