@@ -61,5 +61,24 @@ class TestRectangle(unittest.TestCase):
         intersect_bottom = Rectangle(2, 0, 2, 3)
         self.assertTrue(self.rect.is_in(intersect_bottom))
 
+    def test_is_point_inside(self):
+        # Создайте прямоугольник
+        rect = Rectangle(0, 0, 10, 10)
+
+        # Точка внутри прямоугольника
+        self.assertTrue(rect.is_point_inside(5, 5))
+
+        # Точка на границе прямоугольника
+        self.assertTrue(rect.is_point_inside(0, 0))
+        self.assertTrue(rect.is_point_inside(0, 10))
+        self.assertTrue(rect.is_point_inside(10, 0))
+        self.assertTrue(rect.is_point_inside(10, 10))
+
+        # Точка вне прямоугольника
+        self.assertFalse(rect.is_point_inside(-1, -1))
+        self.assertFalse(rect.is_point_inside(11, 11))
+        self.assertFalse(rect.is_point_inside(5, -5))
+        self.assertFalse(rect.is_point_inside(-5, 5))
+
 if __name__ == '__main__':
     unittest.main()

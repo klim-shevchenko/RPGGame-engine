@@ -8,8 +8,9 @@ class Game():
         self.rpg_dict_of_area = {} # словарь, хранящий в себе множество экземпляров класса Area, {number - ключ : name Area - значение}
         self.team_of_pc = [] # список, хранящий в себе имена экземпляров класса Actor с параметром category = "pc"
         self.canvas = canvas # графика
-        self.window = window # окно для графики
+        self.root = window # окно для графики
         self.current_area = None # параметр хранящий, текущую зону
+        self.scripts = []  # Список для хранения запущенных сценариев
         self.canvas.bind("<Button-1>", self.mouse_left_click)
 
     def new_area(self, name, area):
@@ -35,15 +36,6 @@ class Game():
         for key, value in params.items():
             class_attributes[key] = value
         return type(name, (Actor,), class_attributes)
-
-    def new_item(self, name, **params):
-        ''' добавляет новый предмет '''
-        self
-
-    def new_spell(self, name, **params):
-        ''' добавляет новое заклинание '''
-        self
-
     def add_pc_to_team(self, pc):
         ''' добавдяет персонажа в команду '''
         if pc.category == "pc":
@@ -57,10 +49,12 @@ class Game():
         else:
             print('попытка удалить персонажа из команды не успешна')
 
-    def start_script(self, script):
+    def start_script(self, script_function):
         ''' активирует скрипт '''
-        knight_thread = threading.Thread(target=script)
-        knight_thread.daemon = True
+        script_thread = threading.Thread(target=script_function, args=(self,))
+        script_thread.daemon = True
+        script_thread.start()
+        self.scripts.append(script_thread)
 
     def stop_thread(script):
         '''остановливает скрипт '''
@@ -85,9 +79,17 @@ class Game():
     def timer(self):
         '''таймер дожен вызывать метод update постоянно'''
         self.update()
-        self.window.after(1000, self.timer())
+        self.root.after(50, self.timer)
 
     def mouse_left_click(self, event):
         for actor in self.current_area.list_of_actors:
             if actor.category == 'pc':
                 actor.search_position(event.x, event.y)
+
+    def new_item(self, name, **params):
+        ''' добавляет новый предмет '''
+        self
+
+    def new_spell(self, name, **params):
+        ''' добавляет новое заклинание '''
+        self

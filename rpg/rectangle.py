@@ -11,11 +11,15 @@ class Rectangle:
                 self.y >= rect.y and
                 self.x + self.width <= rect.x + rect.width and
                 self.y + self.height <= rect.y + rect.height)
+    def is_point_inside(self, target_x, target_y):
+        """Проверяет, входит ли точка (x, y) в данный прямоугольник."""
+        return ((self.x >= target_x + self.width/2) or (self.x <= target_x - self.width/2)) or ((self.y >= target_y + self.height/2) or (self.y <= target_y - self.height/2))
 
-    '''def update_coords(self, x1, y1, x2, y2):
-        изменяет координаты прямоугольника
-        self.canvas.coords(self.rect, x1, y1, x2, y2)
-
-    def delete(self):
-        удаляет прямоугольник
-        self.canvas.delete(self.rect)'''
+    '''def is_point_inside(self, x, y):
+        """Проверяет, входит ли точка (x, y) в данный прямоугольник.
+        Args:
+            x (float): абсцисса точки
+            y (float): ордината точки
+        Returns:
+            bool: True, если точка входит в прямоугольник, иначе False"""
+        return (self.x <= x <= self.x + self.width and self.y <= y <= self.y + self.height)'''

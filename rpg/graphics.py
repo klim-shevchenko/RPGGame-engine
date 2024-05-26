@@ -1,5 +1,4 @@
 import tkinter as tk
-import time
 class Graphics(tk.Canvas):
     """Класс Canvas с дополнительными методами для работы со спрайтами."""
     def __init__(self, master, **kwargs):

@@ -7,37 +7,32 @@ import time
 import random
 from rpg.rectangle import *
 
-
 #пробный скрипт
-def knight_script():
+def walk(self):
+    """Сценарий для движения рыцаря."""
     while True:
-        # Определить направление движения
-        directions = [50, 100, 150, 200]
-        direction = random.choice(directions)
+        # Выбираем случайное направление
+        direction = random.choice(["up", "down", "left", "right"])
 
-        # Логика движения в выбранном направлении
-        if direction == 50:
-            k2.target_x = direction
-            k2.target_y = direction
-            pass
-        elif direction == 100:
-            k2.target_x = direction
-            k2.target_y = direction
-            pass
-        elif direction == 150:
-            k2.target_x = direction
-            k2.target_y = direction
-            pass
-        elif direction == 200:
-            k2.target_x = direction
-            k2.target_y = direction
-            pass
+        # Устанавливаем целевую точку в зависимости от направления
+        if direction == "up":
+            k2.target_y -= 100
+            k2.target_x -= 0
+        elif direction == "down":
+            k2.target_y += 100
+            k2.target_x -= 0
+        elif direction == "left":
+            k2.target_x -= 100
+            k2.target_y -= 0
+        elif direction == "right":
+            k2.target_x += 100
+            k2.target_y -= 0
 
+        # Обновляем координаты рыцаря
+        k2.update()
+
+        # Ждем 2 секунды перед выбором нового направления
         time.sleep(2)
-
-def timer():
-    first_game.update()
-    root.after(50, timer)
 
 root = tk.Tk()
 root.geometry('1500x1500')
@@ -64,29 +59,26 @@ Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10, spr
 k = Knight()
 
 #добавил нового персонажа
-Knight1 = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10, sprite=Sprite('images/npc_dr_knight_0 #176474.png'))
+Knight1 = first_game.new_actor('Knight1', category='npc', strange=5, wizdom=10, sprite=Sprite('images/npc_dr_knight_0 #176474.png'))
 k2 = Knight1()
-house.add_object(k2, 75, 75, 1)
-
+house.add_object(k2, 120, 120, 1)
 
 first_game.add_pc_to_team(k)
-k.speed_x = 2
-k.speed_y = 1
 first_game.new_area('Meadow', meadow)
 Bandit = first_game.new_actor("Bandit", category="NPC", strange=12, wizdom=8, sprite=Sprite('images/npc_dr_knight_0 #176474.png'))
 b = Bandit()
 meadow.add_object(b, 320, 185, 1)
 canvas.update()
-print(first_game.team_of_pc)
-print(house.list_of_actors)
+#print(first_game.team_of_pc)
+print(meadow.list_of_actors)
 
 # Функции, которые будут вызываться при нажатии кнопки
-
 first_game.set_area('House')
+print(house.list_of_actors)
 first_game.set_team(house,200, 120, 1)
 def on_button_click4():
     first_game.set_area('House')
-    first_game.set_team(house,400, 20, 1)
+    first_game.set_team(house,120, 20, 1)
     print(house.list_of_actors)
 
 def on_button_click5():
@@ -104,7 +96,8 @@ button5.place(x = 1201,y = 30)
 
 canvas.place(height = 700, width =700)
 
-first_game.start_script(knight_script)
-root.after(1000, timer)
+first_game.start_script(walk)
+'''root.after(1000, timer)'''
+first_game.timer()
 # Основной цикл обработки событий
 root.mainloop()

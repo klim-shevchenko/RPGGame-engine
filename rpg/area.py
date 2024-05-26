@@ -19,7 +19,7 @@ class Area():
         obj.pos_x = x
         obj.pos_y = y
         obj.pos_z = z
-        if obj.category == None:
+        if not obj.category:
             self.list_of_objects.append(obj)
         else:
             self.list_of_actors.append(obj)
