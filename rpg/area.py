@@ -5,6 +5,7 @@ class Area():
         self.list_of_actors = []  # список, хранящий в себе множество экземпляров классов Actor
         self.sprites = [] # список, хранящий в себе множество экземпляров класов Sprite
         self.rectangles = None # список, хранящий в себе множетво прямоугольников
+
     def add_sprite(self, sprite, x, y, z):
         '''добавляет спрайт в зону
         param sprite - экземпляр спрайта, x y z - коодринаты'''
@@ -28,6 +29,7 @@ class Area():
     def add_rect(self, rec):
         ''' добавляет прямоугольник в зону'''
         self.rectangles = rec
+
     def check_obj_sprite(self):
         ''' проверяет координаты объекта '''
         self

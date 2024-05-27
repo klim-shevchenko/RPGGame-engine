@@ -10,7 +10,7 @@ class Game():
         self.canvas = canvas # графика
         self.root = window # окно для графики
         self.current_area = None # параметр хранящий, текущую зону
-        self.scripts = []  # Список для хранения запущенных сценариев
+        self.scripts = {}  # Словарь для хранения запущенных сценариев
         self.canvas.bind("<Button-1>", self.mouse_left_click)
 
     def new_area(self, name, area):
@@ -36,6 +36,7 @@ class Game():
         for key, value in params.items():
             class_attributes[key] = value
         return type(name, (Actor,), class_attributes)
+
     def add_pc_to_team(self, pc):
         ''' добавдяет персонажа в команду '''
         if pc.category == "pc":
@@ -49,16 +50,46 @@ class Game():
         else:
             print('попытка удалить персонажа из команды не успешна')
 
-    def start_script(self, script_function):
-        ''' активирует скрипт '''
+    '''def start_script(self, script_function):
+         """активирует скрипт""" 
         script_thread = threading.Thread(target=script_function, args=(self,))
         script_thread.daemon = True
         script_thread.start()
-        self.scripts.append(script_thread)
+        self.scripts.append(script_thread)'''
 
-    def stop_thread(script):
-        '''остановливает скрипт '''
-        script
+    def start_script(self, script_function, script_name, *args):
+        """
+        Запускает сценарий в отдельном потоке с возможностью остановки и передачи аргументов.
+
+        :param script_function: Функция, содержащая код сценария.
+        :param script_name: Имя сценария.
+        :param args: Дополнительные аргументы, которые нужно передать в сценарий.
+        """
+        # Создание потока для сценария
+        script_thread = threading.Thread(target=script_function, args=args)
+        script_thread.daemon = True
+        script_thread.start()
+
+        # Добавление потока в словарь активных сценариев
+        self.scripts[script_name] = script_thread
+
+    def stop_script(self, script_name):
+        """
+        Останавливает сценарий по имени.
+        :param script_name: Имя сценария, который нужно остановить.
+        """
+        # Проверка существования сценария
+        if script_name in self.scripts:
+            # Если сценарий существует, прерываем его выполнение
+            self.scripts[script_name].join()
+            #self.scripts[script_name].interrupt()
+            # Убираем сценарий из словаря активных сценариев
+            del self.scripts[script_name]
+            print(f"Сценарий {script_name} остановлен.")
+        else:
+            # Если сценарий не существует
+            print(f"Сценарий {script_name} не существует.")
+
     def set_team(self, area, x, y, z):
         ''' устанавливает команду. '''
         for elememt in self.team_of_pc:
@@ -76,11 +107,6 @@ class Game():
         self.current_area.update()
         self.canvas.update()
 
-    def timer(self):
-        '''таймер дожен вызывать метод update постоянно'''
-        self.update()
-        self.root.after(50, self.timer)
-
     def mouse_left_click(self, event):
         for actor in self.current_area.list_of_actors:
             if actor.category == 'pc':
@@ -93,3 +119,8 @@ class Game():
     def new_spell(self, name, **params):
         ''' добавляет новое заклинание '''
         self
+
+    def timer(self):
+        '''таймер дожен вызывать метод update постоянно'''
+        self.update()
+        self.root.after(50, self.timer)
