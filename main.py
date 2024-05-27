@@ -10,26 +10,36 @@ from rpg.rectangle import *
 #пробный скрипт
 def walk(self):
     """Сценарий для движения рыцаря."""
+    new_x = 0
+    new_y = 0
     while True:
         # Выбираем случайное направление
         direction = random.choice(["up", "down", "left", "right"])
 
         # Устанавливаем целевую точку в зависимости от направления
         if direction == "up":
-            k2.target_y -= 100
-            k2.target_x -= 0
+            '''k2.target_y -= 100
+            k2.target_x -= 0'''
+            new_y -= 100
+            new_x = 0
         elif direction == "down":
-            k2.target_y += 100
-            k2.target_x -= 0
+            '''k2.target_y += 100
+            k2.target_x -= 0'''
+            new_y += 100
+            new_x = 0
         elif direction == "left":
-            k2.target_x -= 100
-            k2.target_y -= 0
+            '''k2.target_x -= 100
+            k2.target_y -= 0'''
+            new_y = 0
+            new_x -= 100
         elif direction == "right":
-            k2.target_x += 100
-            k2.target_y -= 0
+            '''k2.target_x += 100
+            k2.target_y -= 0'''
+            new_y = 0
+            new_x += 100
 
         # Обновляем координаты рыцаря
-        k2.update()
+        k2.search_position(new_x, new_y)
 
         # Ждем 2 секунды перед выбором нового направления
         time.sleep(2)
