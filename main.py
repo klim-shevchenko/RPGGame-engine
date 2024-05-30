@@ -12,29 +12,29 @@ def walk(step_x, step_y):
     """Сценарий для движения рыцаря."""
     new_x = 0
     new_y = 0
-    while True:
-        # Выбираем случайное направление
-        direction = random.choice(["up", "down", "left", "right"])
 
-        # Устанавливаем целевую точку в зависимости от направления
-        if direction == "up":
-            new_y -= step_y
-            new_x = step_x
-        elif direction == "down":
-            new_y += step_y
-            new_x = step_x
-        elif direction == "left":
-            new_y = step_y
-            new_x -= step_x
-        elif direction == "right":
-            new_y = step_y
-            new_x += step_x
+    # Выбираем случайное направление
+    direction = random.choice(["up", "down", "left", "right"])
 
-        # Обновляем координаты рыцаря
-        k2.search_position(new_x, new_y)
+    # Устанавливаем целевую точку в зависимости от направления
+    if direction == "up":
+        new_y -= step_y
+        new_x = step_x
+    elif direction == "down":
+        new_y += step_y
+        new_x = step_x
+    elif direction == "left":
+        new_y = step_y
+        new_x -= step_x
+    elif direction == "right":
+        new_y = step_y
+        new_x += step_x
 
-        # Ждем 2 секунды перед выбором нового направления
-        time.sleep(2)
+    # Обновляем координаты рыцаря
+    k2.search_position(new_x, new_y)
+
+    # Ждем 2 секунды перед выбором нового направления
+    time.sleep(2)
 
 root = tk.Tk()
 root.geometry('1500x1500')

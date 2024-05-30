@@ -11,6 +11,7 @@ class Game():
         self.root = window # окно для графики
         self.current_area = None # параметр хранящий, текущую зону
         self.scripts = {}  # Словарь для хранения запущенных сценариев
+        self.events = {} # Словарь для хранения запущенных event`ов сценариев
         self.canvas.bind("<Button-1>", self.mouse_left_click)
 
     def new_area(self, name, area):
@@ -50,13 +51,6 @@ class Game():
         else:
             print('попытка удалить персонажа из команды не успешна')
 
-    '''def start_script(self, script_function):
-         """активирует скрипт""" 
-        script_thread = threading.Thread(target=script_function, args=(self,))
-        script_thread.daemon = True
-        script_thread.start()
-        self.scripts.append(script_thread)'''
-
     def start_script(self, script_function, script_name, *args):
         """
         Запускает сценарий в отдельном потоке с возможностью остановки и передачи аргументов.
@@ -66,13 +60,20 @@ class Game():
         :param args: Дополнительные аргументы, которые нужно передать в сценарий.
         """
         # Создание потока для сценария
-        script_thread = threading.Thread(target=script_function, args=args)
+        e = threading.Event()
+        self.events[script_name] = e
+
+        def func(e, args):
+            while not e.is_set():
+                script_function(*args)
+
+        # Создание потока для сценария
+        script_thread = threading.Thread(target=func, args=(e, args))
         script_thread.daemon = True
         script_thread.start()
 
         # Добавление потока в словарь активных сценариев
         self.scripts[script_name] = script_thread
-
     def stop_script(self, script_name):
         """
         Останавливает сценарий по имени.
@@ -81,10 +82,10 @@ class Game():
         # Проверка существования сценария
         if script_name in self.scripts:
             # Если сценарий существует, прерываем его выполнение
-            self.scripts[script_name].join()
-            #self.scripts[script_name].interrupt()
+            self.events[script_name].set()
             # Убираем сценарий из словаря активных сценариев
             del self.scripts[script_name]
+            del self.events[script_name]
             print(f"Сценарий {script_name} остановлен.")
         else:
             # Если сценарий не существует
