@@ -14,12 +14,3 @@ class Rectangle:
     def is_point_inside(self, target_x, target_y):
         """Проверяет, входит ли точка (x, y) в данный прямоугольник."""
         return ((self.x >= target_x + self.width/2) or (self.x <= target_x - self.width/2)) or ((self.y >= target_y + self.height/2) or (self.y <= target_y - self.height/2))
-
-    '''def is_point_inside(self, x, y):
-        """Проверяет, входит ли точка (x, y) в данный прямоугольник.
-        Args:
-            x (float): абсцисса точки
-            y (float): ордината точки
-        Returns:
-            bool: True, если точка входит в прямоугольник, иначе False"""
-        return (self.x <= x <= self.x + self.width and self.y <= y <= self.y + self.height)'''

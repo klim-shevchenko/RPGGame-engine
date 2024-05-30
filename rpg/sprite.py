@@ -19,6 +19,7 @@ class Sprite:
     def get_tag(self):
         """Возвращает тег спрайта."""
         return self.tag
+
     def update(self, new_x, new_y):
         """Обновляет координаты спрайта."""
         if self.tag:

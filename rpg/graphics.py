@@ -16,12 +16,14 @@ class Graphics(tk.Canvas):
         sprite.y = y
         self.sprites.append(sprite)
         self.sprites.sort(key=lambda sprite: sprite.z)  # сортировка спрайтов по z-координате
+
     def update(self):
         """Перерисовывает все спрайты."""
         for sprite in self.sprites:
             self.tag_raise(sprite.get_tag())  # перемещаем спрайт на передний план
             self.coords(sprite.get_tag(), sprite.x, sprite.y)
             self.itemconfig(sprite.get_tag(), image=sprite.image)
+
     def change_sprite(self, sprite, new_image):
         """Изменяет изображение спрайта.
         param sprite - экземпляр спрайта, new_image = новое изображение."""

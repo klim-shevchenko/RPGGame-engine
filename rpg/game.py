@@ -74,6 +74,7 @@ class Game():
 
         # Добавление потока в словарь активных сценариев
         self.scripts[script_name] = script_thread
+
     def stop_script(self, script_name):
         """
         Останавливает сценарий по имени.
