@@ -1,6 +1,12 @@
+from rpg.sprite import *
 class Object():
-    def __init__(self, x, y, z, sprite, **params):
+    def __init__(self, x, y, z, sprite, states, **params):
         self.pos_x = x
         self.pos_y = y
         self.pos_z = z
         self.sprite = sprite
+        self.states = states
+        self.set_state(next(iter(self.states)))  # Установка первого состояния
+
+    def set_state(self, state_name):
+        self.sprite = self.states[state_name]

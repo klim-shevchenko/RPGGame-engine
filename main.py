@@ -36,6 +36,34 @@ def walk(step_x, step_y):
     # Ждем 2 секунды перед выбором нового направления
     time.sleep(2)
 
+def walk_two(step_x, step_y):
+    """Сценарий для движения рыцаря."""
+    new_x = 0
+    new_y = 0
+
+    # Выбираем случайное направление
+    direction = random.choice(["up", "down", "left", "right"])
+
+    # Устанавливаем целевую точку в зависимости от направления
+    if direction == "up":
+        new_y -= step_y
+        new_x = step_x
+    elif direction == "down":
+        new_y += step_y
+        new_x = step_x
+    elif direction == "left":
+        new_y = step_y
+        new_x -= step_x
+    elif direction == "right":
+        new_y = step_y
+        new_x += step_x
+
+    # Обновляем координаты рыцаря
+    b.search_position(new_x, new_y)
+
+    # Ждем 2 секунды перед выбором нового направления
+    time.sleep(2)
+
 root = tk.Tk()
 root.geometry('1500x1500')
 
@@ -62,19 +90,21 @@ house.add_rect(Rectangle(x =0, y = 0, width=image_0.image.width(), height=image_
 meadow.add_sprite(image_1, 140, 140, 0)
 meadow.add_rect(Rectangle(x =0, y = 0, width=500, height=500))
 first_game.new_area('House', house)
-Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10, sprite=image_2)
-k = Knight()
+statess = {'idle': Sprite('images/mage_0_0.png'), 'move': Sprite('images/npc_dr_knight_0 #176474.png')}
+Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10)
+k = Knight(0, 0, 0, image_2, statess)
 
 #добавил нового персонажа
 Knight1 = first_game.new_actor('Knight1', category='npc', strange=5, wizdom=10, sprite=image_3)
-k2 = Knight1()
+k2 = Knight1(0, 0, 0, image_3, {'idle': Sprite('images/npc_dr_knight_0 #176474.png'), 'move': Sprite('images/enemy_skeleton_dog_0 #333165.png')})
 house.add_object(k2, 120, 120, 1)
 
 first_game.add_pc_to_team(k)
 first_game.new_area('Meadow', meadow)
 Bandit = first_game.new_actor("Bandit", category="NPC", strange=12, wizdom=8, sprite=image_3)
-b = Bandit()
-meadow.add_object(b, 320, 185, 1)
+b = Bandit(0, 0, 0, image_3, {'idle': Sprite('images/npc_dr_knight_0 #176474.png'), 'move': Sprite('images/enemy_skeleton_dog_0 #333165.png')})
+house.add_object(b, 220, 185, 1)
+#meadow.add_object(b, 320, 185, 1)
 canvas.update()
 print(meadow.list_of_actors)
 
@@ -93,16 +123,24 @@ def on_button_click5():
     first_game.set_team(meadow,100, 260, 1)
 
 def on_button_click6():
-    first_game.start_script(walk, 'walk_script', 100, 100)
+    first_game.start_script(walk, 'walk_script', 50, 50)
 
 def on_button_click7():
     first_game.stop_script('walk_script')
+
+def on_button_click8():
+    first_game.start_script(walk_two, 'walk_two_script', 50, 50)
+
+def on_button_click9():
+    first_game.stop_script('walk_two_script')
 
 # Создание кнопки
 button4 = tk.Button(root, text="установить новую зону дом", command=on_button_click4)
 button5 = tk.Button(root, text="установить новую зону луг", command=on_button_click5)
 button6 = tk.Button(root, text="запустить скрипт", command=on_button_click6)
 button7 = tk.Button(root, text="остановить скрипт", command=on_button_click7)
+button8 = tk.Button(root, text="запустить скрипт_2", command=on_button_click8)
+button9 = tk.Button(root, text="остановить скрипт_2", command=on_button_click9)
 
 # Размещение кнопки на окне
 exit_button.place(x = 1201,y = 60)
@@ -110,6 +148,8 @@ button4.place(x = 1201,y = 0)
 button5.place(x = 1201,y = 30)
 button6.place(x = 1201,y = 90)
 button7.place(x = 1201,y = 120)
+button8.place(x = 1201,y = 150)
+button9.place(x = 1201,y = 180)
 
 canvas.place(height = 700, width =700)
 

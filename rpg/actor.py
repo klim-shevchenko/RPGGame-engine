@@ -1,18 +1,18 @@
-#from object import *
+from rpg.object import *
 import time
 from rpg.rectangle import *
-class Actor():
-    def __init__(self, x = 0, y = 0, z = 0, **params):
+class Actor(Object):
+    def __init__(self, x, y, z, sprite, states, **params):
         '''класс Actor для работы с персонажем'''
-        self.pos_x = x #  числовое значение обозначающее расположение на экране, по координате x
+        super().__init__(x, y, z, sprite, states, **params)
+        '''self.pos_x = x #  числовое значение обозначающее расположение на экране, по координате x
         self.pos_y = y #  числовое значение обозначающее расположение на экране, по координате y
-        self.pos_z = z #  числовое значение обозначающее расположение на экране, по координате z
+        self.pos_z = z #  числовое значение обозначающее расположение на экране, по координате z'''
         self.speed_x = 0 #  значение скорости x
         self.speed_y = 0 #  значение скорости y
         self.target_x = 0
         self.target_y = 0
         self.rectangle = Rectangle(self.pos_x, self.pos_y, self.sprite.image.width(), self.sprite.image.height())
-        self.state = "idle"  # Параметр состояния: idle, moving, ...
 
     def update(self):
         '''изменяет координаты персонажа'''
@@ -26,13 +26,13 @@ class Actor():
             self.speed_y = 0
             self.target_x = self.pos_x
             self.target_y = self.pos_y
-            self.state = "idle"
+            '''self.state = "idle"'''
         self.sprite.update(self.pos_x, self.pos_y)
 
     def search_position(self, new_x, new_y):
         '''Изменяет направление движения у персонажа'''
         if self.pos_x != new_x or self.pos_y != new_y:
-            self.state = "moving"
+            '''self.state = "moving"'''
             self.target_x = new_x
             self.target_y = new_y
             vec_x = new_x - self.pos_x
@@ -48,7 +48,7 @@ class Actor():
 
     def stop_move(self):
         '''останавливает движение персонажа'''
-        self.state = "idle"  # Обновить состояние на "idle"
+        '''self.state = "idle"  # Обновить состояние на "idle"'''
         self.pos_x -= self.speed_x
         self.pos_y -= self.speed_y
         self.target_x = self.pos_x
@@ -57,10 +57,6 @@ class Actor():
         self.rectangle.y = self.pos_y
         self.speed_x = 0
         self.speed_y = 0
-
-    def set_state(self, new_state):
-        '''обновляет состояние персонажа'''
-        self.state = new_state
 
     def read_text(self, text):
         '''вывод содержимого поля act_text экземпляра класса Actor на экран'''
