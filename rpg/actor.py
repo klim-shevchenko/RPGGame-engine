@@ -19,6 +19,10 @@ class Actor(Object):
         if  self.rectangle.is_point_inside(self.target_x, self.target_y):
             self.pos_x += self.speed_x
             self.pos_y += self.speed_y
+            if self.speed_x >= 0:
+                self.set_state('left')
+            else:
+                self.set_state('right')
             self.rectangle.x = self.pos_x
             self.rectangle.y = self.pos_y
         else:
@@ -26,7 +30,6 @@ class Actor(Object):
             self.speed_y = 0
             self.target_x = self.pos_x
             self.target_y = self.pos_y
-            '''self.state = "idle"'''
         self.sprite.update(self.pos_x, self.pos_y)
 
     def search_position(self, new_x, new_y):
