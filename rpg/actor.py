@@ -1,10 +1,11 @@
 from rpg.object import *
 import time
+from rpg.sprite import *
 from rpg.rectangle import *
 class Actor(Object):
-    def __init__(self, x, y, z, sprite, states, **params):
+    def __init__(self, x, y, z, sprite, states, canvas, **params):
         '''класс Actor для работы с персонажем'''
-        super().__init__(x, y, z, sprite, states, **params)
+        super().__init__(x, y, z, sprite, states, canvas, **params)
         '''self.pos_x = x #  числовое значение обозначающее расположение на экране, по координате x
         self.pos_y = y #  числовое значение обозначающее расположение на экране, по координате y
         self.pos_z = z #  числовое значение обозначающее расположение на экране, по координате z'''
@@ -12,6 +13,7 @@ class Actor(Object):
         self.speed_y = 0 #  значение скорости y
         self.target_x = 0
         self.target_y = 0
+        self.canvas = canvas
         self.rectangle = Rectangle(self.pos_x, self.pos_y, self.sprite.image.width(), self.sprite.image.height())
 
     def update(self):
@@ -19,7 +21,7 @@ class Actor(Object):
         if  self.rectangle.is_point_inside(self.target_x, self.target_y):
             self.pos_x += self.speed_x
             self.pos_y += self.speed_y
-            if self.speed_x >= 0:
+            if self.speed_x <= 0:
                 self.set_state('left')
             else:
                 self.set_state('right')

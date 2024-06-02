@@ -31,7 +31,7 @@ def walk(step_x, step_y):
         new_x += step_x
 
     # Обновляем координаты рыцаря
-    k2.search_position(new_x, new_y)
+    #k2.search_position(new_x, new_y)
 
     # Ждем 2 секунды перед выбором нового направления
     time.sleep(2)
@@ -59,7 +59,7 @@ def walk_two(step_x, step_y):
         new_x += step_x
 
     # Обновляем координаты рыцаря
-    b.search_position(new_x, new_y)
+    #b.search_position(new_x, new_y)
 
     # Ждем 2 секунды перед выбором нового направления
     time.sleep(2)
@@ -91,19 +91,19 @@ house.add_rect(Rectangle(x =0, y = 0, width=image_0.image.width(), height=image_
 meadow.add_sprite(image_1, 140, 140, 0)
 meadow.add_rect(Rectangle(x =0, y = 0, width=500, height=500))
 first_game.new_area('House', house)
-statess = {'right': image_2_1, 'left': image_2}
+statess = {'right': image_2, 'left': image_2_1}
 Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10)
-k = Knight(0, 0, 0, image_2, statess)
+k = Knight(0, 0, 0, image_2_1, statess, canvas)
 
 #добавил нового персонажа
 Knight1 = first_game.new_actor('Knight1', category='npc', strange=5, wizdom=10, sprite=image_3)
-k2 = Knight1(0, 0, 0, image_3, {'idle': Sprite('images/npc_dr_knight_0 #176474.png'), 'move': Sprite('images/enemy_skeleton_dog_0 #333165.png')})
+#k2 = Knight1(0, 0, 0, image_3, {'idle': Sprite('images/npc_dr_knight_0 #176474.png'), 'move': Sprite('images/enemy_skeleton_dog_0 #333165.png')})
 #house.add_object(k2, 120, 120, 1)
 
 first_game.add_pc_to_team(k)
 first_game.new_area('Meadow', meadow)
 Bandit = first_game.new_actor("Bandit", category="NPC", strange=12, wizdom=8, sprite=image_3)
-b = Bandit(0, 0, 0, image_3, {'idle': Sprite('images/npc_dr_knight_0 #176474.png'), 'move': Sprite('images/enemy_skeleton_dog_0 #333165.png')})
+#b = Bandit(0, 0, 0, image_3, {'idle': Sprite('images/npc_dr_knight_0 #176474.png'), 'move': Sprite('images/enemy_skeleton_dog_0 #333165.png')})
 #house.add_object(b, 220, 185, 1)
 #meadow.add_object(b, 320, 185, 1)
 canvas.update()

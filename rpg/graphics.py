@@ -24,11 +24,17 @@ class Graphics(tk.Canvas):
             self.coords(sprite.get_tag(), sprite.x, sprite.y)
             self.itemconfig(sprite.get_tag(), image=sprite.image)
 
-    def change_sprite(self, sprite, new_image):
+    def change_sprite(self, sprite, new_sprite):
+        """Изменяет изображение спрайта.
+        param sprite - экземпляр спрайта, new_sprite = новый спрайт."""
+        tag = sprite.get_tag()
+        self.itemconfig(tag, image=new_sprite.image)
+        sprite.image = new_sprite.image
+    '''def change_sprite(self, sprite, new_image):
         """Изменяет изображение спрайта.
         param sprite - экземпляр спрайта, new_image = новое изображение."""
         self.itemconfig(sprite.get_tag(), image=new_image)
-        sprite.image=new_image
+        sprite.image=new_image'''
 
     def delete_sprite(self, sprite):
         """Удаляет спрайт с Canvas.
