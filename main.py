@@ -68,9 +68,9 @@ root = tk.Tk()
 root.geometry('1500x1500')
 
 exit_button = tk.Button(root, text="Exit", fg="red", command=root.destroy)
-
 # Создание экземпляра класса graphics, который будет взаимодействовать с окном
 canvas = Graphics(root, width=1500, height=1500)
+Graphics.canvas = canvas  # Присваиваем canvas в статическое поле
 
 # Создание экземпляра класса game
 first_game = Game(canvas, root)
@@ -92,6 +92,7 @@ meadow.add_sprite(image_1, 140, 140, 0)
 meadow.add_rect(Rectangle(x =0, y = 0, width=500, height=500))
 first_game.new_area('House', house)
 statess = {'right': image_2, 'left': image_2_1}
+
 Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10)
 k = Knight(0, 0, 0, image_2_1, statess, canvas)
 
@@ -112,12 +113,14 @@ print(meadow.list_of_actors)
 # Функции, которые будут вызываться при нажатии кнопки
 first_game.set_area('House')
 print(house.list_of_actors)
+print(canvas.sprites)
 first_game.set_team(house,200, 120, 1)
 
 def on_button_click4():
     first_game.set_area('House')
     first_game.set_team(house,120, 20, 1)
     print(house.list_of_actors)
+    print(canvas.sprites)
 
 def on_button_click5():
     first_game.set_area('Meadow')
@@ -134,6 +137,18 @@ def on_button_click8():
 
 def on_button_click9():
     first_game.stop_script('walk_two_script')
+
+
+# Функция для смены спрайта персонажа
+def change_sprite(actor, new_sprite):
+    actor.sprite = new_sprite
+
+# Создание кнопки для смены спрайта
+button_change_sprite = tk.Button(root, text="Сменить спрайт рыцаря", command=lambda: change_sprite(k, image_2_1))
+
+# Размещение новой кнопки на окне
+button_change_sprite.place(x = 1201, y = 210)
+
 
 # Создание кнопки
 button4 = tk.Button(root, text="установить новую зону дом", command=on_button_click4)

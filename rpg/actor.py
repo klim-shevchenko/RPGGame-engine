@@ -2,6 +2,7 @@ from rpg.object import *
 import time
 from rpg.sprite import *
 from rpg.rectangle import *
+
 class Actor(Object):
     def __init__(self, x, y, z, sprite, states, canvas, **params):
         '''класс Actor для работы с персонажем'''
@@ -37,7 +38,6 @@ class Actor(Object):
     def search_position(self, new_x, new_y):
         '''Изменяет направление движения у персонажа'''
         if self.pos_x != new_x or self.pos_y != new_y:
-            '''self.state = "moving"'''
             self.target_x = new_x
             self.target_y = new_y
             vec_x = new_x - self.pos_x
@@ -53,7 +53,6 @@ class Actor(Object):
 
     def stop_move(self):
         '''останавливает движение персонажа'''
-        '''self.state = "idle"  # Обновить состояние на "idle"'''
         self.pos_x -= self.speed_x
         self.pos_y -= self.speed_y
         self.target_x = self.pos_x
@@ -65,6 +64,7 @@ class Actor(Object):
 
     def read_text(self, text):
         '''вывод содержимого поля act_text экземпляра класса Actor на экран'''
+        self.canvas.draw_text(text, self.pos_x, self.pos_y)
 
     def open_inventory(self, inventory):
         '''вывод содержимого поля act_inventory экземпляра класса Actor на экран'''

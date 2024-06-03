@@ -115,8 +115,14 @@ class Game():
                 actor.search_position(event.x, event.y)
 
     def new_item(self, name, **params):
-        ''' добавляет новый предмет '''
-        self
+        ''' создаёт новый предмет и добавляет его в словарь предметов игры '''
+        '''item_attributes = {}
+        for key, value in params.items():
+            item_attributes[key] = value
+        new_item = type(name, (Item,), item_attributes)
+        # Добавление нового предмета в словарь игры
+        self.items[name] = new_item
+        return new_item'''
 
     def new_spell(self, name, **params):
         ''' добавляет новое заклинание '''

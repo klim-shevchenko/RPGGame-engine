@@ -1,10 +1,14 @@
 import tkinter as tk
+
+global canvas
 class Graphics(tk.Canvas):
     """Класс Canvas с дополнительными методами для работы со спрайтами."""
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
         self.sprites = []  # список спрайтов
         self.mouse = None
+        self.canvas = None
+        Graphics.canvas = self.canvas
 
     def add_sprite(self, sprite, x, y, z, **kwargs):
         """Добавляет спрайт на Canvas.
@@ -24,17 +28,17 @@ class Graphics(tk.Canvas):
             self.coords(sprite.get_tag(), sprite.x, sprite.y)
             self.itemconfig(sprite.get_tag(), image=sprite.image)
 
+
     def change_sprite(self, sprite, new_sprite):
         """Изменяет изображение спрайта.
         param sprite - экземпляр спрайта, new_sprite = новый спрайт."""
-        tag = sprite.get_tag()
-        self.itemconfig(tag, image=new_sprite.image)
-        sprite.image = new_sprite.image
-    '''def change_sprite(self, sprite, new_image):
-        """Изменяет изображение спрайта.
-        param sprite - экземпляр спрайта, new_image = новое изображение."""
-        self.itemconfig(sprite.get_tag(), image=new_image)
-        sprite.image=new_image'''
+        tag = new_sprite.get_tag()
+        sprite.set_tag(tag)
+        self.sprites[self.sprites.index(sprite)] = new_sprite  # Обновляем спрайт в списке
+    '''tag = sprite.get_tag()
+    self.itemconfig(tag, image=new_sprite.image)
+    sprite.image = new_sprite.image
+    self.sprites[self.sprites.index(sprite)] = new_sprite  # Обновляем спрайт в списке'''
 
     def delete_sprite(self, sprite):
         """Удаляет спрайт с Canvas.
