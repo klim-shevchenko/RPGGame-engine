@@ -1,5 +1,4 @@
 import tkinter as tk
-
 global canvas
 class Graphics(tk.Canvas):
     """Класс Canvas с дополнительными методами для работы со спрайтами."""
@@ -32,13 +31,26 @@ class Graphics(tk.Canvas):
     def change_sprite(self, sprite, new_sprite):
         """Изменяет изображение спрайта.
         param sprite - экземпляр спрайта, new_sprite = новый спрайт."""
-        tag = new_sprite.get_tag()
-        sprite.set_tag(tag)
-        self.sprites[self.sprites.index(sprite)] = new_sprite  # Обновляем спрайт в списке
-    '''tag = sprite.get_tag()
-    self.itemconfig(tag, image=new_sprite.image)
-    sprite.image = new_sprite.image
-    self.sprites[self.sprites.index(sprite)] = new_sprite  # Обновляем спрайт в списке'''
+        old_sprite_pos = None
+        for i, s in enumerate(self.sprites):
+            if s.get_tag() == sprite.get_tag():
+                old_sprite_pos = i
+                break
+
+        if old_sprite_pos is not None:
+            old_tag = sprite.get_tag()
+
+            # Обновляем список спрайтов
+            self.sprites[old_sprite_pos] = new_sprite
+            new_sprite.set_tag(old_tag)
+
+            # Обновляем тег нового спрайта
+            new_sprite.set_tag(old_tag)
+
+            # Перемещаем новый спрайт на передний план и обновляем его координаты
+            self.tag_raise(old_tag)
+            self.coords(old_tag, sprite.x, sprite.y)
+            self.itemconfig(old_tag, image=new_sprite.image)
 
     def delete_sprite(self, sprite):
         """Удаляет спрайт с Canvas.

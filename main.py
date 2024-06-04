@@ -91,7 +91,7 @@ house.add_rect(Rectangle(x =0, y = 0, width=image_0.image.width(), height=image_
 meadow.add_sprite(image_1, 140, 140, 0)
 meadow.add_rect(Rectangle(x =0, y = 0, width=500, height=500))
 first_game.new_area('House', house)
-statess = {'right': image_2, 'left': image_2_1}
+statess = {'left': image_2_1 , 'right': image_2}
 
 Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10)
 k = Knight(0, 0, 0, image_2_1, statess, canvas)
@@ -113,9 +113,8 @@ print(meadow.list_of_actors)
 # Функции, которые будут вызываться при нажатии кнопки
 first_game.set_area('House')
 print(house.list_of_actors)
-print(canvas.sprites)
 first_game.set_team(house,200, 120, 1)
-
+print(canvas.sprites)
 def on_button_click4():
     first_game.set_area('House')
     first_game.set_team(house,120, 20, 1)

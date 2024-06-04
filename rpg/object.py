@@ -16,6 +16,6 @@ class Object():
             self.states[state_name].x = self.pos_x
             self.states[state_name].y = self.pos_y
             self.states[state_name].z = self.pos_z
-            self.sprite = self.states[state_name]
             self.canvas.change_sprite(self.sprite, self.states[state_name])
+            self.sprite = self.states[state_name]
             print(self.current_state)
