@@ -17,6 +17,7 @@ class Actor(Object):
         self.canvas = canvas
         self.rectangle = Rectangle(self.pos_x, self.pos_y, self.sprite.image.width(), self.sprite.image.height())
 
+    # требуется закомментировать, если выбран вариант animate_sprite
     def update(self):
         '''изменяет координаты персонажа'''
         if  self.rectangle.is_point_inside(self.target_x, self.target_y):
@@ -46,6 +47,24 @@ class Actor(Object):
             self.target_x = self.pos_x
             self.target_y = self.pos_y
         self.sprite.update(self.pos_x, self.pos_y)
+
+        # требуется раскомментировать, если выбран вариант animate_sprite
+    '''def anim_update(self): 
+        if  self.rectangle.is_point_inside(self.target_x, self.target_y):
+            self.pos_x += self.speed_x
+            self.pos_y += self.speed_y
+            if self.speed_x > 0 and (-0.5 <= self.speed_y <= 0.5):
+                self.animate_sprite('right')
+            self.rectangle.x = self.pos_x
+            self.rectangle.y = self.pos_y
+        else:
+            self.speed_x = 0
+            self.speed_y = 0
+            self.target_x = self.pos_x
+            self.target_y = self.pos_y
+            if self.i != 1:
+                self.animate_sprite(self.current_state)
+        self.sprite.update(self.pos_x, self.pos_y)'''
 
     def search_position(self, new_x, new_y):
         '''Изменяет направление движения у персонажа'''

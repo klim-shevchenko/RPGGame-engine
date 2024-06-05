@@ -38,6 +38,7 @@ class Area():
         '''изменяет проверяет изменение всех персонажей в зоне'''
         for actor in self.list_of_actors:
             if actor.rectangle.is_in(self.rectangles):
-                actor.update()
+                actor.update() # требуется закомментировать, если выбран вариант animate_sprite
+                '''actor.anim_update()''' # требуется раскомментировать, если выбран вариант animate_sprite
             else:
                 actor.stop_move()
