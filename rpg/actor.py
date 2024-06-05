@@ -36,7 +36,6 @@ class Actor(Object):
                 self.set_state('up_right')
             elif self.speed_x < 0 and self.speed_y >= 0:
                 self.set_state('down_left')
-
             elif self.speed_x < 0 and self.speed_y < 0:
                 self.set_state('up_left')
             self.rectangle.x = self.pos_x

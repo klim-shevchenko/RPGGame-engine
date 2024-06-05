@@ -96,6 +96,14 @@ image_3_4 = Sprite('images/Footman_4.png')
 image_3_5 = Sprite('images/Footman_5.png')
 image_3_6 = Sprite('images/Footman_6.png')
 image_3_7 = Sprite('images/Footman_7.png')
+image_4_0 = Sprite('images/Grunt_0.png')
+image_4_1 = Sprite('images/Grunt_1.png')
+image_4_2 = Sprite('images/Grunt_2.png')
+image_4_3 = Sprite('images/Grunt_3.png')
+image_4_4 = Sprite('images/Grunt_4.png')
+image_4_5 = Sprite('images/Grunt_5.png')
+image_4_6 = Sprite('images/Grunt_6.png')
+image_4_7 = Sprite('images/Grunt_7.png')
 
 # Загрузка изображения в зоны, добавление зон в игру
 house.add_sprite(image_0, 140, 140, 0)
@@ -106,6 +114,7 @@ meadow.add_rect(Rectangle(x =0, y = 0, width=500, height=500))
 first_game.new_area('House', house)
 states_0 = {'down': image_2_0, 'down_right': image_2_1, 'right': image_2_2, 'up_right': image_2_3, 'up': image_2_4, 'down_left': image_2_5, 'left': image_2_6, 'up_left': image_2_7}
 states_1 = {'down': image_3_0, 'down_right': image_3_1, 'right': image_3_2, 'up_right': image_3_3, 'up': image_3_4, 'down_left': image_3_5, 'left': image_3_6, 'up_left': image_3_7}
+states_2 = {'down': image_4_0, 'down_right': image_4_1, 'right': image_4_2, 'up_right': image_4_3, 'up': image_4_4, 'down_left': image_4_5, 'left': image_4_6, 'up_left': image_4_7}
 
 Knight = first_game.new_actor('Knight', category='pc', strange=5, wizdom=10)
 k = Knight(0, 0, 0, image_2_1, states_0, canvas)
@@ -118,8 +127,8 @@ house.add_object(k2, 120, 120, 1)
 first_game.add_pc_to_team(k)
 first_game.new_area('Meadow', meadow)
 Bandit = first_game.new_actor("Bandit", category="NPC", strange=12, wizdom=8, sprite=image_3_0)
-#b = Bandit(0, 0, 0, image_3, {'idle': Sprite('images/npc_dr_knight_0 #176474.png'), 'move': Sprite('images/enemy_skeleton_dog_0 #333165.png')})
-#house.add_object(b, 220, 185, 1)
+b = Bandit(0, 0, 0, image_4_0, states_2, canvas)
+house.add_object(b, 220, 185, 1)
 #meadow.add_object(b, 320, 185, 1)
 canvas.update()
 print(meadow.list_of_actors)
