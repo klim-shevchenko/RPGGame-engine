@@ -22,10 +22,23 @@ class Actor(Object):
         if  self.rectangle.is_point_inside(self.target_x, self.target_y):
             self.pos_x += self.speed_x
             self.pos_y += self.speed_y
-            if self.speed_x <= 0:
-                self.set_state('left')
-            else:
+            if (-0.5 <= self.speed_x <= 0.5) and self.speed_y >= 0:
+                self.set_state('down')
+            elif (-0.5 <= self.speed_x <= 0.5) and self.speed_y < 0:
+                self.set_state('up')
+            elif self.speed_x >= 0 and (-0.5 <= self.speed_y <= 0.5):
                 self.set_state('right')
+            elif self.speed_x < 0 and (-0.5 <= self.speed_y <= 0.5):
+                self.set_state('left')
+            elif self.speed_x >= 0 and self.speed_y >= 0:
+                self.set_state('down_right')
+            elif self.speed_x >= 0 and self.speed_y < 0:
+                self.set_state('up_right')
+            elif self.speed_x < 0 and self.speed_y >= 0:
+                self.set_state('down_left')
+
+            elif self.speed_x < 0 and self.speed_y < 0:
+                self.set_state('up_left')
             self.rectangle.x = self.pos_x
             self.rectangle.y = self.pos_y
         else:
@@ -77,22 +90,3 @@ class Actor(Object):
 
     def target_use_item(self, item, target):
         ''' вызов метода use\_item экземпляра класса Item'''
-
-    '''self.act_name = name # имя персонажа
-    self.act_category = category
-    self.act_hp = hp
-    self.act_ac = ac
-    self.act_alive = True       
-    self.act_loot = () # список, хранящий экземпляры класса Item
-    self.act_text = None # текстовое сообщение, которое будет у нпс
-    self.act_dnd_class = dnd_class # текстовое значение, обозначение класса ("warrior" "wizard" "cleric")
-    self.act_level = level # числовое значение, обозначающее уровень персонажа
-    self.act_race = race # текстовое значение, обозначающее расу персонажа("human" "elf" "dwarf")
-    self.act_str = strange # числовое значение, обозначающее показатель храктеристики "сила"
-    self.act_agi = agi # числовое значение, обозначающее показатель храктеристики "ловкость"
-    self.act_con = con # числовое значение, обозначающее показатель храктеристики "телосложение"
-    self.act_inteligence = inteligence # числовое значение, обозначающее показатель храктеристики "интеллект"
-    self.act_wiz = wiz # числовое значение, обозначающее показатель храктеристики "мудрость"
-    self.act_charizma = charizma # числовое значение, обозначающее показатель храктеристики "харизма"
-    self.act_inventory = () # список, хранящий в себе множество экземпляров классов Item
-    self.act_list_spells = () # список, хранящий в себе множество экземпляров классов Spell'''
