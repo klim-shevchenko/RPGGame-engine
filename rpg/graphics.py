@@ -1,13 +1,12 @@
 import tkinter as tk
-global canvas
 class Graphics(tk.Canvas):
+    canvas = None
     """Класс Canvas с дополнительными методами для работы со спрайтами."""
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
         self.sprites = []  # список спрайтов
         self.mouse = None
-        self.canvas = None
-        Graphics.canvas = self.canvas
+        Graphics.canvas = self
 
     def add_sprite(self, sprite, x, y, z, **kwargs):
         """Добавляет спрайт на Canvas.

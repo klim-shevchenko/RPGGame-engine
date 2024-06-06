@@ -26,7 +26,7 @@ class Game():
             self.current_area = self.rpg_dict_of_area[name]
             self.canvas.clear_all()
             for sprite in self.current_area.sprites:
-                sprite.update(sprite.x, sprite.y)
+                sprite.set_coords(sprite.x, sprite.y)
                 self.canvas.add_sprite(sprite, sprite.x, sprite.y, sprite.z)
 
     def new_actor(self, name, **params):

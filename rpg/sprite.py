@@ -20,7 +20,7 @@ class Sprite:
         """Возвращает тег спрайта."""
         return self.tag
 
-    def update(self, new_x, new_y):
+    def set_coords(self, new_x, new_y):
         """Обновляет координаты спрайта."""
         if self.tag:
             self.x = new_x
