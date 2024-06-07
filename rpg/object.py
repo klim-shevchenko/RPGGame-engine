@@ -1,12 +1,13 @@
 from rpg.sprite import *
 from rpg.graphics import *
 class Object():
-    def __init__(self, x, y, z, sprite, states, **params):
+    def __init__(self, x, y, z, **params):
+        #def __init__(self, x, y, z, sprite, states, **params):
         self.pos_x = x
         self.pos_y = y
         self.pos_z = z
-        self.sprite = sprite
-        self.states = states
+        #self.sprite = sprite
+        #self.states = states
         self.current_state = None # требуется закомментировать, если выбран вариант animate_sprite
         #self.current_state = 'right' # требуется раскомментировать, если выбран вариант animate_sprite
         self.set_state(next(iter(self.states)))  # Установка первого состояния # требуется закомментировать, если выбран вариант animate_sprite

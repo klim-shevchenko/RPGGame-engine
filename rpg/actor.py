@@ -3,9 +3,11 @@ from rpg.sprite import *
 from rpg.rectangle import *
 
 class Actor(Object):
-    def __init__(self, x, y, z, sprite, states, **params):
+    def __init__(self, x, y, z, **params):
+        #def __init__(self, x, y, z, sprite, states, **params):
+        #super().__init__(x, y, z, sprite, states, **params)
         '''класс Actor для работы с персонажем'''
-        super().__init__(x, y, z, sprite, states, **params)
+        super().__init__(x, y, z, **params)
         self.speed_x = 0 #  значение скорости x
         self.speed_y = 0 #  значение скорости y
         self.target_x = 0

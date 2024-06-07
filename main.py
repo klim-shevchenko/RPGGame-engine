@@ -74,7 +74,7 @@ canvas = Graphics(root, width=1500, height=1500)
 Graphics.canvas = canvas  # Присваиваем canvas в статическое поле
 
 # создание новой игры
-new_game = BaldursGame(canvas, root)
+BaldursGame(canvas, root)
 
 # Создание экземпляра класса game
 """first_game = Game(canvas, root)
@@ -158,7 +158,7 @@ states_3 = {'down': [image_2_0_0, image_2_0_1, image_2_0_2, image_2_0_3, image_2
 
 Mage = first_game.new_actor('Mage', category='pc', strange=5, wizdom=10)
 m = Mage(0, 0, 0, image_2_0_0, states_0) # требуется закомментировать, если выбран вариант animate_sprite
-'''k = Knight(0, 0, 0, image_2_2_0, states_3, canvas)''' # требуется раскомментировать, если выбран вариант animate_sprite
+'''m = Mage(0, 0, 0, image_2_2_0, states_3, canvas)''' # требуется раскомментировать, если выбран вариант animate_sprite
 
 #добавил нового персонажа
 Knight1 = first_game.new_actor('Knight1', category='npc', strange=5, wizdom=10, sprite=image_3_0_0) # требуется закомментировать, если выбран вариант animate_sprite
@@ -172,10 +172,13 @@ b = Bandit(0, 0, 0, image_4_0_0, states_2) # требуется закоммен
 house.add_object(b, 220, 185, 1) # требуется закомментировать, если выбран вариант animate_sprite
 meadow.add_object(b, 320, 185, 1)
 
-# Функции, которые будут вызываться при нажатии кнопки
+#установка первой зоны и команды персонажей
 first_game.set_area('House')
 print(house.list_of_actors)
 first_game.set_team(house,200, 120, 1)
+
+# Функции, которые будут вызываться при нажатии кнопки
+
 print(canvas.sprites)"""
 """def on_button_click4():
     first_game.set_area('House')
@@ -218,7 +221,7 @@ button8.place(x = 1201,y = 150)
 button9.place(x = 1201,y = 180)"""
 
 canvas.place(height = 700, width =700)
-new_game.timer()
+BaldursGame.timer
 '''first_game.timer()''' # в конструкторе бг
 # Основной цикл обработки событий
 root.mainloop()

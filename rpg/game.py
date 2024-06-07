@@ -92,17 +92,22 @@ class Game():
             # Если сценарий не существует
             print(f"Сценарий {script_name} не существует.")
 
-    def set_team(self, area, x, y, z):
+    def set_team(self, name, x, y, z):
+        if name in self.rpg_dict_of_area:
+            area = self.rpg_dict_of_area[name]
         ''' устанавливает команду. '''
+
         for elememt in self.team_of_pc:
             if elememt in area.list_of_actors:
                 elememt.pos_x = x
                 elememt.pos_y = y
                 elememt.pos_z = z
                 elememt.sprite.update(elememt.pos_x, elememt.pos_y)
+                print(elememt)
             else:
                 area.add_object(elememt, x, y, z)
                 self.canvas.add_sprite(elememt.sprite, elememt.sprite.x, elememt.sprite.y, elememt.sprite.z)
+                print(elememt)
 
     def update(self):
         ''' вызывается в таймере для обновления всех переменных в текущей зоне. '''
