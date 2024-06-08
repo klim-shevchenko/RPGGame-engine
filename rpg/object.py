@@ -6,11 +6,12 @@ class Object():
         self.pos_x = x
         self.pos_y = y
         self.pos_z = z
-        #self.sprite = sprite
+        self.sprite = None
         #self.states = states
         self.current_state = None # требуется закомментировать, если выбран вариант animate_sprite
         #self.current_state = 'right' # требуется раскомментировать, если выбран вариант animate_sprite
-        self.set_state(next(iter(self.states)))  # Установка первого состояния # требуется закомментировать, если выбран вариант animate_sprite
+        if self.states is not None:
+            self.set_state(next(iter(self.states)))  # Установка первого состояния # требуется закомментировать, если выбран вариант animate_sprite
         self.i = 0
 
     # требуется закомментировать, если выбран вариант animate_sprite

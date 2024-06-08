@@ -13,6 +13,7 @@ class Game():
         self.scripts = {}  # Словарь для хранения запущенных сценариев
         self.events = {} # Словарь для хранения запущенных event`ов сценариев
         self.canvas.bind("<Button-1>", self.mouse_left_click)
+        Game.game = self
 
     def new_area(self, name, area):
         ''' добавляет новую зону в список
@@ -137,3 +138,12 @@ class Game():
         '''таймер дожен вызывать метод update постоянно'''
         self.update()
         self.root.after(50, self.timer)
+
+def new_actor(self, name, **params):
+        ''' создёт класс, потомок от Actor и создаёт поле из параметров, и установление их в начальные значения.
+        params name - название нового класса, **params - поля нового класса
+        return - новый класс '''
+        class_attributes = {}
+        for key, value in params.items():
+            class_attributes[key] = value
+        return type(name, (Actor,), class_attributes)

@@ -8,6 +8,7 @@ class Actor(Object):
         #super().__init__(x, y, z, sprite, states, **params)
         '''класс Actor для работы с персонажем'''
         super().__init__(x, y, z, **params)
+        self.sprite = self.states[next(iter(self.states))]
         self.speed_x = 0 #  значение скорости x
         self.speed_y = 0 #  значение скорости y
         self.target_x = 0
