@@ -1,8 +1,9 @@
 from rpg.sprite import *
 from rpg.actor import *
-
+from rpg.game import new_actor
+"""
 class Mage(Actor):
-    """image_2_0_0 = Sprite('images/Mage_0_0.png')
+    image_2_0_0 = Sprite('images/Mage_0_0.png')
     image_2_0_1 = Sprite('images/Mage_0_1.png')
     image_2_0_2 = Sprite('images/Mage_0_2.png')
     image_2_0_3 = Sprite('images/Mage_0_3.png')
@@ -53,7 +54,7 @@ class Mage(Actor):
                 'down_left': [image_2_5_0, image_2_5_1, image_2_5_2, image_2_5_3, image_2_5_4],
                 'left': [image_2_6_0, image_2_6_1, image_2_6_2, image_2_6_3, image_2_6_4],
                 'up_left': [image_2_7_0, image_2_7_1, image_2_7_2, image_2_7_3, image_2_7_4]}"""
-
+"""
     def __init__(self, x, y, z, **params):
         '''класс Mage для работы с персонажем Волшебником'''
 
@@ -67,3 +68,14 @@ class Mage(Actor):
         self.category = 'pc'
         self.strange = 5
         self.wizdom = 10
+"""
+
+Mage = new_actor('Mage', category='pc', strange=5, wizdom=10, name='Mage',
+                 states = {'down': Sprite('images/Mage_0_0.png'),
+                           'down_right': Sprite('images/Mage_1_0.png'),
+                           'right': Sprite('images/Mage_2_0.png'),
+                           'up_right': Sprite('images/Mage_3_0.png'),
+                           'up': Sprite('images/Mage_4_0.png'),
+                            'down_left': Sprite('images/Mage_5_0.png'),
+                            'left': Sprite('images/Mage_6_0.png'),
+                            'up_left': Sprite('images/Mage_7_0.png')})

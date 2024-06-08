@@ -1,7 +1,6 @@
 from rpg.game import *
 from rpg.graphics import *
 from rpg.sprite import *
-from mage import *
 #from grunt import *
 #from footman import *
 from ruins import *
@@ -14,6 +13,7 @@ class BaldursGame(Game):
         super().__init__(canvas, window, **params)
         self.new_area('Ruins', Ruins())
         self.new_area('Village', Village())
+        from mage import Mage
         self.add_pc_to_team(Mage(0, 0, 0))
         self.set_area('Ruins')
         print(self.current_area)
