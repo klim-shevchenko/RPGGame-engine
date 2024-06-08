@@ -22,6 +22,7 @@ class Graphics(tk.Canvas):
     def update(self):
         """Перерисовывает все спрайты."""
         for sprite in self.sprites:
+            sprite.update()
             self.tag_raise(sprite.get_tag())  # перемещаем спрайт на передний план
             self.coords(sprite.get_tag(), sprite.x, sprite.y)
             self.itemconfig(sprite.get_tag(), image=sprite.image)

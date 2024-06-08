@@ -1,25 +1,25 @@
 from rpg.object import *
 from rpg.sprite import *
+from rpg.animation import Animation
 from rpg.rectangle import *
 
 class Actor(Object):
     def __init__(self, x, y, z, **params):
-        #def __init__(self, x, y, z, sprite, states, **params):
-        #super().__init__(x, y, z, sprite, states, **params)
         '''класс Actor для работы с персонажем'''
         super().__init__(x, y, z, **params)
+        self.sprite = self.states[next(iter(self.states))]
         self.speed_x = 0 #  значение скорости x
         self.speed_y = 0 #  значение скорости y
         self.target_x = 0
         self.target_y = 0
         self.rectangle = Rectangle(self.pos_x, self.pos_y, self.sprite.image.width(), self.sprite.image.height())
 
-    # требуется закомментировать, если выбран вариант animate_sprite
     def update(self):
         '''изменяет координаты персонажа'''
         if  self.rectangle.is_point_inside(self.target_x, self.target_y):
             self.pos_x += self.speed_x
             self.pos_y += self.speed_y
+            self.sprite.running = True
             if (-0.5 <= self.speed_x <= 0.5) and self.speed_y >= 0:
                 self.set_state('down')
             elif (-0.5 <= self.speed_x <= 0.5) and self.speed_y < 0:
@@ -43,6 +43,7 @@ class Actor(Object):
             self.speed_y = 0
             self.target_x = self.pos_x
             self.target_y = self.pos_y
+            self.sprite.running = False
         self.sprite.set_coords(self.pos_x, self.pos_y)
         self.rectangle = Rectangle(self.pos_x, self.pos_y, self.sprite.image.width(), self.sprite.image.height())
 
