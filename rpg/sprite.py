@@ -25,6 +25,5 @@ class Sprite:
         if self.tag:
             self.x = new_x
             self.y = new_y
-
     def update(self):
         pass

@@ -147,3 +147,4 @@ def new_actor(self, name, **params):
         for key, value in params.items():
             class_attributes[key] = value
         return type(name, (Actor,), class_attributes)
+
