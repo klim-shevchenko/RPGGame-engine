@@ -21,13 +21,13 @@ class Actor(Object):
             self.pos_x += self.speed_x
             self.pos_y += self.speed_y
             self.sprite.running = True
-            if (-0.5 <= self.speed_x <= 0.5) and self.speed_y >= 0:
+            if (-0.3 <= self.speed_x <= 0.3) and self.speed_y >= 0:
                 self.set_state('down')
-            elif (-0.5 <= self.speed_x <= 0.5) and self.speed_y < 0:
+            elif (-0.3 <= self.speed_x <= 0.3) and self.speed_y < 0:
                 self.set_state('up')
-            elif self.speed_x >= 0 and (-0.5 <= self.speed_y <= 0.5):
+            elif self.speed_x >= 0 and (-0.3 <= self.speed_y <= 0.3):
                 self.set_state('right')
-            elif self.speed_x < 0 and (-0.5 <= self.speed_y <= 0.5):
+            elif self.speed_x < 0 and (-0.3 <= self.speed_y <= 0.3):
                 self.set_state('left')
             elif self.speed_x >= 0 and self.speed_y >= 0:
                 self.set_state('down_right')
@@ -46,7 +46,6 @@ class Actor(Object):
             self.target_y = self.pos_y
             self.sprite.running = False
         self.sprite.set_coords(self.pos_x, self.pos_y)
-        self.rectangle = Rectangle(self.pos_x, self.pos_y, self.sprite.image.width(), self.sprite.image.height())
 
     def search_position(self, new_x, new_y):
         '''Изменяет направление движения у персонажа'''

@@ -46,6 +46,7 @@ class Graphics(tk.Canvas):
 
             # Обновляем тег нового спрайта
             new_sprite.set_tag(old_tag)
+            new_sprite.set_z(sprite.z)
 
             # Перемещаем новый спрайт на передний план и обновляем его координаты
             self.tag_raise(old_tag)

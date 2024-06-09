@@ -26,6 +26,14 @@ class Area():
             self.list_of_actors.append(obj)
         self.add_sprite(obj.sprite, obj.pos_x, y, z)
 
+    def remove_object(self, obj):
+        ''' Удаляет объект из зоны '''
+        if obj in self.list_of_actors:
+            self.list_of_actors.remove(obj)
+            print(f'Объект {obj.name} удален из зоны.')
+        else:
+            print(f'Объект {obj.name} не найден в зоне.')
+
     def add_rect(self, rec):
         ''' добавляет прямоугольник в зону'''
         self.rectangles = rec

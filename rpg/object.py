@@ -5,11 +5,11 @@ class Object():
         self.pos_x = x
         self.pos_y = y
         self.pos_z = z
-        self.current_state = None # требуется закомментировать, если выбран вариант animate_sprite
+        self.current_state = None
         if self.states is not None:
-            self.set_state(next(iter(self.states)))  # Установка первого состояния # требуется закомментировать, если выбран вариант animate_sprite
+            self.set_state(next(iter(self.states)))  # Установка первого состояния
 
-    # требуется закомментировать, если выбран вариант animate_sprite
+
     def set_state(self, state_name):
         if self.current_state != state_name:
             self.current_state = state_name

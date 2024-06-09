@@ -107,40 +107,22 @@ class Game():
             else:
                 area.add_object(elememt, x, y, z)
                 self.canvas.add_sprite(elememt.sprite, elememt.sprite.x, elememt.sprite.y, elememt.sprite.z)'''
+
     def set_team(self, name, x, y, z):
-        # Проверяем, существует ли зона с таким именем
-        if name not in self.rpg_dict_of_area:
-            print(f"Зона с именем {name} не найдена.")
-            return
-
-        # Получаем объект зоны, в которую нужно добавить команду
-        new_area = self.rpg_dict_of_area[name]
-
-        # Перебираем всех актёров в команде
-        for actor in self.team_of_pc:
-            # Удаляем актёра из его текущей зоны
-            if actor.current_area:
-                self.remove_pc_from_team(actor)
-                actor.current_area.list_of_actors.remove(actor)
-                # Также нужно удалить спрайт актёра из текущей зоны
-                if actor.sprite in actor.current_area.sprites:
-                    actor.current_area.sprites.remove(actor.sprite)
-
-            # Обновляем позицию актёра
-            actor.pos_x = x
-            actor.pos_y = y
-            actor.pos_z = z
-            actor.current_area = new_area  # Обновляем текущую зону актёра
-
-            # Добавляем актёра в новую зону
-            new_area.add_object(actor, x, y, z)
-            self.add_pc_to_team(actor)  # Добавляем актёра обратно в команду
-
-        # Обновляем текущую зону игры
-        self.current_area = new_area
+        if name in self.rpg_dict_of_area:
+            new_area = self.rpg_dict_of_area[name]
+            # Удаление персонажей из предыдущей зоны и их спрайтов из графики
+            for pc in self.team_of_pc:
+                if pc.current_area is not None:
+                    pc.current_area.remove_object(pc)
+                    self.canvas.delete_sprite(pc.sprite)
+                # Добавление персонажей в новую зону и на Canvas
+                new_area.add_object(pc, x, y, z)
+                self.canvas.add_sprite(pc.sprite, x, y, z)
+                pc.current_area = new_area
 
     def update(self):
-        ''' вызывается в таймере для обновления всех переменных в текущей зоне. '''
+        """ вызывается в таймере для обновления всех переменных в текущей зоне. """
         self.current_area.update()
         self.canvas.update()
 
@@ -150,7 +132,7 @@ class Game():
                 actor.search_position(event.x, event.y)
 
     def new_item(self, name, **params):
-        ''' создаёт новый предмет и добавляет его в словарь предметов игры '''
+        """ создаёт новый предмет и добавляет его в словарь предметов игры """
         '''item_attributes = {}
         for key, value in params.items():
             item_attributes[key] = value
