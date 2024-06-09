@@ -6,12 +6,13 @@ from rpg.rectangle import *
 class Actor(Object):
     def __init__(self, x, y, z, **params):
         '''класс Actor для работы с персонажем'''
-        super().__init__(x, y, z, **params)
         self.sprite = self.states[next(iter(self.states))]
+        super().__init__(x, y, z, **params)
         self.speed_x = 0 #  значение скорости x
         self.speed_y = 0 #  значение скорости y
         self.target_x = 0
         self.target_y = 0
+        self.current_area = None
         self.rectangle = Rectangle(self.pos_x, self.pos_y, self.sprite.image.width(), self.sprite.image.height())
 
     def update(self):
@@ -46,24 +47,6 @@ class Actor(Object):
             self.sprite.running = False
         self.sprite.set_coords(self.pos_x, self.pos_y)
         self.rectangle = Rectangle(self.pos_x, self.pos_y, self.sprite.image.width(), self.sprite.image.height())
-
-        # требуется раскомментировать, если выбран вариант animate_sprite
-    '''def anim_update(self): 
-        if  self.rectangle.is_point_inside(self.target_x, self.target_y):
-            self.pos_x += self.speed_x
-            self.pos_y += self.speed_y
-            if self.speed_x > 0 and (-0.5 <= self.speed_y <= 0.5):
-                self.animate_sprite('right')
-            self.rectangle.x = self.pos_x
-            self.rectangle.y = self.pos_y
-        else:
-            self.speed_x = 0
-            self.speed_y = 0
-            self.target_x = self.pos_x
-            self.target_y = self.pos_y
-            if self.i != 1:
-                self.animate_sprite(self.current_state)
-        self.sprite.update(self.pos_x, self.pos_y)'''
 
     def search_position(self, new_x, new_y):
         '''Изменяет направление движения у персонажа'''

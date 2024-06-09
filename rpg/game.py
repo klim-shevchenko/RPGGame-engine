@@ -31,7 +31,7 @@ class Game():
                 self.canvas.add_sprite(sprite, sprite.x, sprite.y, sprite.z)
 
     def new_actor(self, name, **params):
-        ''' создёт класс, потомок от Actor и создаёт поле из параметров, и установление их в начальные значения.
+        ''' создаёт класс, потомок от Actor и создаёт поле из параметров, и установление их в начальные значения.
         params name - название нового класса, **params - поля нового класса
         return - новый класс '''
         class_attributes = {}
@@ -93,22 +93,51 @@ class Game():
             # Если сценарий не существует
             print(f"Сценарий {script_name} не существует.")
 
-    def set_team(self, name, x, y, z):
+    '''def set_team(self, name, x, y, z):
         if name in self.rpg_dict_of_area:
             area = self.rpg_dict_of_area[name]
-        ''' устанавливает команду. '''
+        """устанавливает команду."""
 
         for elememt in self.team_of_pc:
             if elememt in area.list_of_actors:
                 elememt.pos_x = x
                 elememt.pos_y = y
                 elememt.pos_z = z
-                elememt.sprite.update(elememt.pos_x, elememt.pos_y)
-                print(elememt)
+                elememt.sprite.set_coords(elememt.pos_x, elememt.pos_y)
             else:
                 area.add_object(elememt, x, y, z)
-                self.canvas.add_sprite(elememt.sprite, elememt.sprite.x, elememt.sprite.y, elememt.sprite.z)
-                print(elememt)
+                self.canvas.add_sprite(elememt.sprite, elememt.sprite.x, elememt.sprite.y, elememt.sprite.z)'''
+    def set_team(self, name, x, y, z):
+        # Проверяем, существует ли зона с таким именем
+        if name not in self.rpg_dict_of_area:
+            print(f"Зона с именем {name} не найдена.")
+            return
+
+        # Получаем объект зоны, в которую нужно добавить команду
+        new_area = self.rpg_dict_of_area[name]
+
+        # Перебираем всех актёров в команде
+        for actor in self.team_of_pc:
+            # Удаляем актёра из его текущей зоны
+            if actor.current_area:
+                self.remove_pc_from_team(actor)
+                actor.current_area.list_of_actors.remove(actor)
+                # Также нужно удалить спрайт актёра из текущей зоны
+                if actor.sprite in actor.current_area.sprites:
+                    actor.current_area.sprites.remove(actor.sprite)
+
+            # Обновляем позицию актёра
+            actor.pos_x = x
+            actor.pos_y = y
+            actor.pos_z = z
+            actor.current_area = new_area  # Обновляем текущую зону актёра
+
+            # Добавляем актёра в новую зону
+            new_area.add_object(actor, x, y, z)
+            self.add_pc_to_team(actor)  # Добавляем актёра обратно в команду
+
+        # Обновляем текущую зону игры
+        self.current_area = new_area
 
     def update(self):
         ''' вызывается в таймере для обновления всех переменных в текущей зоне. '''
