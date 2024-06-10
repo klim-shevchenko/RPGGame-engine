@@ -3,6 +3,7 @@ from rpg.graphics import *
 from rpg.sprite import *
 from rpg.actor import *
 import threading
+
 class Game():
     def __init__(self, canvas, window, **params):
         self.rpg_dict_of_area = {} # словарь, хранящий в себе множество экземпляров класса Area, {number - ключ : name Area - значение}
@@ -24,11 +25,15 @@ class Game():
         ''' устанавливает текущую зону, загружает графику зоны.
          param name - имя зоны.'''
         if name in self.rpg_dict_of_area:
+            if self.current_area is not None:
+                self.current_area.exit_script()
+                for pc in self.team_of_pc:
+                    self.current_area.remove_object(pc)
             self.current_area = self.rpg_dict_of_area[name]
             self.canvas.clear_all()
-            for sprite in self.current_area.sprites:
-                sprite.set_coords(sprite.x, sprite.y)
-                self.canvas.add_sprite(sprite, sprite.x, sprite.y, sprite.z)
+            self.current_area.load_sprites()
+            for pc in self.team_of_pc:
+                self.current_area.add_object(pc, pc.pos_x, pc.pos_y, pc.pos_z)
 
     def new_actor(self, name, **params):
         ''' создаёт класс, потомок от Actor и создаёт поле из параметров, и установление их в начальные значения.
@@ -93,33 +98,12 @@ class Game():
             # Если сценарий не существует
             print(f"Сценарий {script_name} не существует.")
 
-    '''def set_team(self, name, x, y, z):
-        if name in self.rpg_dict_of_area:
-            area = self.rpg_dict_of_area[name]
-        """устанавливает команду."""
-
+    def set_team(self, x, y, z):
+        """устанавливает координаты персонажей команды """
         for elememt in self.team_of_pc:
-            if elememt in area.list_of_actors:
-                elememt.pos_x = x
-                elememt.pos_y = y
-                elememt.pos_z = z
-                elememt.sprite.set_coords(elememt.pos_x, elememt.pos_y)
-            else:
-                area.add_object(elememt, x, y, z)
-                self.canvas.add_sprite(elememt.sprite, elememt.sprite.x, elememt.sprite.y, elememt.sprite.z)'''
-
-    def set_team(self, name, x, y, z):
-        if name in self.rpg_dict_of_area:
-            new_area = self.rpg_dict_of_area[name]
-            # Удаление персонажей из предыдущей зоны и их спрайтов из графики
-            for pc in self.team_of_pc:
-                if pc.current_area is not None:
-                    pc.current_area.remove_object(pc)
-                    self.canvas.delete_sprite(pc.sprite)
-                # Добавление персонажей в новую зону и на Canvas
-                new_area.add_object(pc, x, y, z)
-                self.canvas.add_sprite(pc.sprite, x, y, z)
-                pc.current_area = new_area
+            elememt.pos_x = x
+            elememt.pos_y = y
+            elememt.pos_z = z
 
     def update(self):
         """ вызывается в таймере для обновления всех переменных в текущей зоне. """
@@ -127,7 +111,7 @@ class Game():
         self.canvas.update()
 
     def mouse_left_click(self, event):
-        for actor in self.current_area.list_of_actors:
+        for actor in self.current_area.objects:
             if actor.category == 'pc':
                 actor.search_position(event.x, event.y)
 

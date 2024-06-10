@@ -18,7 +18,5 @@ class BaldursGame(Game):
         from mage import Mage
         self.add_pc_to_team(Mage(0, 0, 0))
         self.set_area('Ruins')
-        print(self.current_area)
-        self.set_team('Ruins', 200, 120, 1)
-        print(self.current_area.list_of_actors)
+        self.set_team(500, 300, 1)
         self.timer()
