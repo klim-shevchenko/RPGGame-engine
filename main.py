@@ -21,6 +21,6 @@ BaldursGame(canvas, root)
 
 canvas.place(height = 1500, width =1500)
 BaldursGame.timer
-'''first_game.timer()''' # в конструкторе бг
+
 # Основной цикл обработки событий
 root.mainloop()

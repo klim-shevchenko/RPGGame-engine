@@ -5,7 +5,13 @@ from rpg.rectangle import *
 
 class Actor(Object):
     def __init__(self, x, y, z, **params):
-        '''класс Actor для работы с персонажем'''
+        '''
+        Класс Actor для работы с персонажем
+
+        :param x: координата x
+        :param y: координата y
+        :param z: координата z
+        '''
         self.sprite = self.states[next(iter(self.states))]
         super().__init__(x, y, z, **params)
         self.speed_x = 0 #  значение скорости x
@@ -15,8 +21,11 @@ class Actor(Object):
         self.rectangle = Rectangle(self.pos_x, self.pos_y, self.sprite.image.width(), self.sprite.image.height())
 
     def update(self):
-        '''изменяет координаты персонажа'''
-        if  self.rectangle.is_point_inside(self.target_x, self.target_y):
+        '''
+        изменяет координаты персонажа
+
+        '''
+        if  self.rectangle.is_point_inside(self.target_x, self.target_y) and not self.angry:
             self.pos_x += self.speed_x
             self.pos_y += self.speed_y
             self.sprite.running = True
@@ -47,7 +56,12 @@ class Actor(Object):
         self.sprite.set_coords(self.pos_x, self.pos_y)
 
     def search_position(self, new_x, new_y):
-        '''Изменяет направление движения у персонажа'''
+        '''
+        Изменяет направление движения у персонажа
+
+        :param new_x: координата новой точки x
+        :param new_y: координата новой точки y
+        '''
         if self.pos_x != new_x or self.pos_y != new_y:
             self.target_x = new_x
             self.target_y = new_y
@@ -63,7 +77,10 @@ class Actor(Object):
             self.speed_y = 0
 
     def stop_move(self):
-        '''останавливает движение персонажа'''
+        '''
+        Останавливает движение персонажа
+
+        '''
         self.pos_x -= self.speed_x
         self.pos_y -= self.speed_y
         self.target_x = self.pos_x
@@ -74,8 +91,11 @@ class Actor(Object):
         self.speed_y = 0
 
     def read_text(self, text):
-        '''вывод содержимого поля act_text экземпляра класса Actor на экран'''
-        self.canvas.draw_text(text, self.pos_x, self.pos_y)
+        '''
+        Вывод содержимого поля act_text экземпляра класса Actor на экран
+
+        '''
+        Graphics.canvas.draw_text(text, self.pos_x, self.pos_y)
 
     def open_inventory(self, inventory):
         '''вывод содержимого поля act_inventory экземпляра класса Actor на экран'''

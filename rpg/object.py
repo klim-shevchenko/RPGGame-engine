@@ -4,6 +4,13 @@ from rpg.rectangle import Rectangle
 
 class Object():
     def __init__(self, x, y, z, **params):
+        '''
+        Класс объекта с который будет изменяться методами игровой системы и методами графической системы
+
+        :param x: координата x
+        :param y: координата y
+        :param z: координата z
+        '''
         self.pos_x = x
         self.pos_y = y
         self.pos_z = z

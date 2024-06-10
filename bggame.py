@@ -3,8 +3,6 @@ from rpg.graphics import *
 from rpg.game import *
 from rpg.graphics import *
 from rpg.sprite import *
-#from grunt import *
-#from footman import *
 from ruins import *
 from village import *
 import time
@@ -12,6 +10,12 @@ import random
 
 class BaldursGame(Game):
     def __init__(self, canvas, window, **params):
+        '''
+        Класс конкретной игры для демострации
+
+        :param canvas: класс графической системы
+        :param window: окно на которое будет выводится игра
+        '''
         super().__init__(canvas, window, **params)
         self.new_area('Ruins', Ruins())
         self.new_area('Village', Village())

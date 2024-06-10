@@ -26,6 +26,11 @@ class Portal(Object):
         self.visible = False
 
     def actor_in(self, actor):
+        '''
+        Проверяет находится ли персонаж внутри портала
+
+        :param actor: проверяемый персонаж
+        '''
         if actor.category == "pc":
             Game.game.set_area(self.area)
             Game.game.set_team(self.team_x, self.team_y, 100)
