@@ -4,11 +4,12 @@ from rpg.area import *
 from rpg.sprite import *
 from rpg.rectangle import *
 from rpg.game import Game
+from rpg.portal import Portal
 
 class Ruins(Area):
     def __init__(self):
         super().__init__()
-        self.add_sprite(Sprite('images/fon3.png'), 140, 140, 0)
+        self.add_sprite(Sprite('images/fon3.png'), 400, 400, 0)
         self.add_rect(Rectangle(x=0, y=0, width=Sprite('images/fon3.png').image.width(), height=Sprite('images/fon3.png').image.height()))
         from grunt import Grunt
         self.grunt = Grunt(0,0,0)
@@ -16,6 +17,8 @@ class Ruins(Area):
         self.footman = Footman(0,0,0)
         self.add_object(self.footman, 120, 120, 1)
         self.add_object(self.grunt, 220, 185, 1)
+        p = Portal(400, 400, 200, 200, 'Village', 50, 200)
+        self.add_object(p, p.pos_x, p.pos_y, 100)
         Game.game.start_script(self.walk, "grunt", 50, 50)
         Game.game.start_script(self.walk_two, "footman", 50, 50)
 
