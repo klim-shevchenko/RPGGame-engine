@@ -12,7 +12,6 @@ class Actor(Object):
         self.speed_y = 0 #  значение скорости y
         self.target_x = 0
         self.target_y = 0
-        self.current_area = None
         self.rectangle = Rectangle(self.pos_x, self.pos_y, self.sprite.image.width(), self.sprite.image.height())
 
     def update(self):
