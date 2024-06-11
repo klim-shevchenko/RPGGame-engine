@@ -17,10 +17,10 @@ class BaldursGame(Game):
         :param window: окно на которое будет выводится игра
         '''
         super().__init__(canvas, window, **params)
-        self.new_area('Ruins', Ruins())
-        self.new_area('Village', Village())
         from mage import Mage
         self.add_pc_to_team(Mage(0, 0, 0))
+        self.new_area('Ruins', Ruins())
+        self.new_area('Village', Village())
         self.set_area('Ruins')
         self.set_team(500, 300, 1)
         self.timer()

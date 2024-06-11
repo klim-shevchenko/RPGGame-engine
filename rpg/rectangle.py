@@ -30,5 +30,9 @@ class Rectangle:
 
         :param target_x: точка x
         :param target_y: точка y
+        return ((self.x <= target_x + self.width) or (self.x >= target_x - self.width)) and ((self.y <= target_y + self.height) or (self.y >= target_y - self.height))
+        return ((self.x <= target_x <= self.width) or (self.x >= target_x >= self.width)) and ((self.y <= target_y <= self.height) or (self.y <= target_y <= self.height))
+
         '''
-        return ((self.x >= target_x + self.width/2) or (self.x <= target_x - self.width/2)) or ((self.y >= target_y + self.height/2) or (self.y <= target_y - self.height/2))
+        return ((self.x >= target_x + self.width / 2) or (self.x <= target_x - self.width / 2)) or (
+                    (self.y >= target_y + self.height / 2) or (self.y <= target_y - self.height / 2))

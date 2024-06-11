@@ -1,4 +1,5 @@
 import random
+from math import sqrt
 import time
 from rpg.area import *
 from rpg.sprite import *
@@ -23,7 +24,8 @@ class Ruins(Area):
         self.add_object(self.grunt, 220, 185, 1)
         p = Portal(400, 400, 200, 200, 'Village', 480, 100)
         self.add_object(p, p.pos_x, p.pos_y, 100)
-        Game.game.start_script(self.walk, "grunt", 50, 50)
+        #Game.game.start_script(self.walk, "grunt", 50, 50)
+        Game.game.start_script(self.ai, "ai", self.grunt)
         Game.game.start_script(self.walk_two, "footman", 50, 50)
 
 
@@ -56,7 +58,7 @@ class Ruins(Area):
             new_y = step_y
             new_x += step_x
 
-        # Обновляем координаты рыцаря
+        # Обновляем координаты бугая
         self.grunt.search_position(new_x, new_y)  # требуется закомментировать, если выбран вариант animate_sprite
 
         # Ждем 2 секунды перед выбором нового направления
@@ -92,5 +94,32 @@ class Ruins(Area):
         # Обновляем координаты рыцаря
         self.footman.search_position(new_x, new_y)  # требуется закомментировать, если выбран вариант animate_sprite
 
+        # Ждем 2 секунды перед выбором нового направления
+        time.sleep(2)
+
+    def ai(self, actor):
+        '''
+        скрипт противников
+
+        :param step_x: размер шага x до персонажа игрока
+        :param step_y: размер шага x до персонажа игрока
+        :param actor: персонаж противник
+        '''
+        if actor.hp <= 0:
+            Game.game.stop_script("ai")
+        import rpg.game
+        pc = rpg.game.Game.game.team_of_pc[0]
+        new_x = pc.pos_x
+        new_y = pc.pos_y
+
+        # Обновляем координаты рыцаря
+        actor.search_position(new_x, new_y)  # требуется закомментировать, если выбран вариант animate_sprite
+        dx = pc.pos_x - actor.pos_x
+        dy = pc.pos_y - actor.pos_y
+        dist = sqrt(dx * dx + dy * dy)
+        if dist <= actor.ATTACK_RANGE:
+            actor.attack(pc)
+            if pc.hp <=0:
+                Game.game.stop_script("ai")
         # Ждем 2 секунды перед выбором нового направления
         time.sleep(2)

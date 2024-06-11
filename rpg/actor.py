@@ -25,10 +25,11 @@ class Actor(Object):
         изменяет координаты персонажа
 
         '''
+        moving = False
         if  self.rectangle.is_point_inside(self.target_x, self.target_y):
             self.pos_x += self.speed_x
             self.pos_y += self.speed_y
-            self.sprite.running = True
+            moving = True
             if (-0.3 <= self.speed_x <= 0.3) and self.speed_y >= 0:
                 self.set_state('down')
             elif (-0.3 <= self.speed_x <= 0.3) and self.speed_y < 0:
@@ -52,7 +53,15 @@ class Actor(Object):
             self.speed_y = 0
             self.target_x = self.pos_x
             self.target_y = self.pos_y
-            self.sprite.running = False
+        if moving:
+            self.sprite.running = True
+            self.sprite.update()
+        else:
+            # Если актёр остановился, проверяем, является ли анимация цикличной
+            if self.sprite.cycle:
+                # Если анимация цикличная, ставим её на паузу
+                self.sprite.running = False
+
         self.sprite.set_coords(self.pos_x, self.pos_y)
 
     def search_position(self, new_x, new_y):

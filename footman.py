@@ -2,7 +2,7 @@ from rpg.sprite import *
 from rpg.actor import *
 from rpg.game import new_actor
 
-Footman = new_actor('Footman', category='npc', hp=10, strange=5, wizdom=10, name='Footman',
+Footman = new_actor('Footman', category='npc', damage=10, hp=10, strange=5, wizdom=10, name='Footman',
                     states={'down': Animation(
                         ['images/Footman_0_0.png', 'images/Footman_0_1.png', 'images/Footman_0_2.png', 'images/Footman_0_3.png',
                          'images/Footman_0_4.png']),
@@ -21,5 +21,5 @@ Footman = new_actor('Footman', category='npc', hp=10, strange=5, wizdom=10, name
                                                'images/Footman_6_3.png', 'images/Footman_6_4.png']),
                             'up_left': Animation(['images/Footman_7_0.png', 'images/Footman_7_1.png', 'images/Footman_7_2.png',
                                                   'images/Footman_7_3.png', 'images/Footman_7_4.png'],),
-                            'death': Animation(['images/Footman_8_0.png', 'images/Footman_8_1.png', 'images/Footman_8_2.png',
-                                            'images/Footman_8_3.png', 'images/Footman_8_4.png', 'images/Footman_8_5.png'])})
+                            'death': Animation(['images/Footman_8_1.png',
+                                            'images/Footman_8_3.png', 'images/Footman_8_5.png'])})
