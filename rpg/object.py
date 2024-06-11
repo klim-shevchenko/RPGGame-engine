@@ -16,6 +16,7 @@ class Object():
         self.pos_z = z
         self.current_state = None
         self.visible = True
+        self.on_click = lambda x : x
         if self.states is not None:
             self.set_state(next(iter(self.states)))  # Установка первого состояния
         self.rectangle = Rectangle(x, y, 10, 10) # из спрайта

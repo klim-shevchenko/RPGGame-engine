@@ -2,7 +2,7 @@ from rpg.sprite import *
 from rpg.actor import *
 from rpg.game import new_actor
 
-Grunt = new_actor('Grunt', category='enemy', strange=5, wizdom=10, name='Grunt',
+Grunt = new_actor('Grunt', category='enemy', hp=10, strange=5, wizdom=10, name='Grunt',
                   states={'down': Animation(
                       ['images/Grunt_0_0.png', 'images/Grunt_0_1.png', 'images/Grunt_0_2.png', 'images/Grunt_0_3.png',
                        'images/Grunt_0_4.png']),

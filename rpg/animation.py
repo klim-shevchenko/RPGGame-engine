@@ -2,7 +2,7 @@ from rpg.sprite import *
 import tkinter as tk
 
 class Animation(Sprite):
-    def __init__(self, frames):
+    def __init__(self, frames, cycle=True):
         '''
         Класс анимации спрайта
 
@@ -14,6 +14,7 @@ class Animation(Sprite):
         self.images = [tk.PhotoImage(file=frame) for frame in frames]  # Загрузка всех кадров анимации
         self.image = self.images[0]  # Установка начального изображения
         self.speed = 0
+        self.cycle = cycle
         self.running = True
 
     def update(self):

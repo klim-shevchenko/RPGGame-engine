@@ -2,7 +2,7 @@ from rpg.sprite import *
 from rpg.actor import *
 from rpg.game import new_actor
 
-Footman = new_actor('Footman', category='npc', strange=5, wizdom=10, name='Footman',
+Footman = new_actor('Footman', category='npc', hp=10, strange=5, wizdom=10, name='Footman',
                     states={'down': Animation(
                         ['images/Footman_0_0.png', 'images/Footman_0_1.png', 'images/Footman_0_2.png', 'images/Footman_0_3.png',
                          'images/Footman_0_4.png']),

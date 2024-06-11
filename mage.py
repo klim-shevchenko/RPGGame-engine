@@ -2,7 +2,7 @@ from rpg.sprite import *
 from rpg.adnd_actor import *
 from rpg.game import new_actor
 
-Mage = new_actor('Mage', category='pc', strange=5, wizdom=10, name='Mage',
+Mage = new_actor('Mage', category='pc', damage=10, hp=10, strange=5, wizdom=10, name='Mage',
                  states={'down': Animation(
                      ['images/Mage_0_0.png', 'images/Mage_0_1.png', 'images/Mage_0_2.png', 'images/Mage_0_3.png',
                       'images/Mage_0_4.png']),
@@ -21,4 +21,4 @@ Mage = new_actor('Mage', category='pc', strange=5, wizdom=10, name='Mage',
                          'up_left': Animation(['images/Mage_7_0.png', 'images/Mage_7_1.png', 'images/Mage_7_2.png',
                                                'images/Mage_7_3.png', 'images/Mage_7_4.png']),
                          'death': Animation(['images/Mage_8_0.png', 'images/Mage_8_1.png', 'images/Mage_8_2.png',
-                                             'images/Mage_8_3.png', 'images/Mage_8_4.png', 'images/Mage_8_5.png', 'images/Mage_8_6.png'])})
+                                             'images/Mage_8_3.png', 'images/Mage_8_4.png', 'images/Mage_8_5.png', 'images/Mage_8_6.png'], False)})

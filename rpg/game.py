@@ -144,8 +144,7 @@ class Game():
         for actor in self.current_area.objects:
             if actor.category == 'enemy':
                 if actor.rectangle.is_point_inside(event.x, event.y):
-                    for pc in self.team_of_pc:
-                        pc.attack(actor)
+                    actor.on_click()
         for actor in self.current_area.objects:
             if actor.category == 'pc':
                 actor.search_position(event.x, event.y)

@@ -25,7 +25,7 @@ class Actor(Object):
         изменяет координаты персонажа
 
         '''
-        if  self.rectangle.is_point_inside(self.target_x, self.target_y) and not self.angry:
+        if  self.rectangle.is_point_inside(self.target_x, self.target_y):
             self.pos_x += self.speed_x
             self.pos_y += self.speed_y
             self.sprite.running = True

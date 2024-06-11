@@ -34,6 +34,8 @@ class Ruins(Area):
         :param step_x: шаг движения x
         :param step_y: шаг движения y
         '''
+        if self.grunt.hp <= 0:
+            Game.game.stop_script("grunt")
         new_x = 200
         new_y = 200
 
