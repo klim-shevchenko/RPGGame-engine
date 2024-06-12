@@ -22,5 +22,5 @@ class BaldursGame(Game):
         self.new_area('Ruins', Ruins())
         self.new_area('Village', Village())
         self.set_area('Ruins')
-        self.set_team(500, 300, 1)
+        self.set_team(500, 300, 100)
         self.timer()

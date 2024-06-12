@@ -19,6 +19,7 @@ class Actor(Object):
         self.target_x = 0
         self.target_y = 0
         self.rectangle = Rectangle(self.pos_x, self.pos_y, self.sprite.image.width(), self.sprite.image.height())
+        self.is_attack = False
 
     def update(self):
         '''
@@ -31,21 +32,45 @@ class Actor(Object):
             self.pos_y += self.speed_y
             moving = True
             if (-0.3 <= self.speed_x <= 0.3) and self.speed_y >= 0:
-                self.set_state('down')
+                if self.is_attack:
+                    self.set_state('down_attack')
+                else:
+                    self.set_state('down')
             elif (-0.3 <= self.speed_x <= 0.3) and self.speed_y < 0:
-                self.set_state('up')
+                if self.is_attack:
+                    self.set_state('up_attack')
+                else:
+                    self.set_state('up')
             elif self.speed_x >= 0 and (-0.3 <= self.speed_y <= 0.3):
-                self.set_state('right')
+                if self.is_attack:
+                    self.set_state('right_attack')
+                else:
+                    self.set_state('right')
             elif self.speed_x < 0 and (-0.3 <= self.speed_y <= 0.3):
-                self.set_state('left')
+                if self.is_attack:
+                    self.set_state('left_attack')
+                else:
+                    self.set_state('left')
             elif self.speed_x >= 0 and self.speed_y >= 0:
-                self.set_state('down_right')
+                if self.is_attack:
+                    self.set_state('down_right_attack')
+                else:
+                    self.set_state('down_right')
             elif self.speed_x >= 0 and self.speed_y < 0:
-                self.set_state('up_right')
+                if self.is_attack:
+                    self.set_state('up_right_attack')
+                else:
+                    self.set_state('up_right')
             elif self.speed_x < 0 and self.speed_y >= 0:
-                self.set_state('down_left')
+                if self.is_attack:
+                    self.set_state('down_left_attack')
+                else:
+                    self.set_state('down_left')
             elif self.speed_x < 0 and self.speed_y < 0:
-                self.set_state('up_left')
+                if self.is_attack:
+                    self.set_state('up_left_attack')
+                else:
+                    self.set_state('up_left')
             self.rectangle.x = self.pos_x
             self.rectangle.y = self.pos_y
         else:

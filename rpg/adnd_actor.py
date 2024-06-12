@@ -6,7 +6,7 @@ import rpg.game
 
 class Adnd_actor(Actor):
 
-    ATTACK_RANGE = 30
+    ATTACK_RANGE = 50
     
     def __init__(self, x, y, z, **params):
         '''
@@ -17,7 +17,7 @@ class Adnd_actor(Actor):
         :param z: координата z
         '''
         super().__init__(x, y, z, **params)
-        self.angry = False
+        #self.is_attack = False
         self.alive = True
         self.on_click = self.click
 
@@ -31,25 +31,12 @@ class Adnd_actor(Actor):
             return
         dx = pc.pos_x - self.pos_x
         dy = pc.pos_y - self.pos_y
-        if (-0.3 <= dx <= 0.3) and dy >= 0:
-            pc.set_state('down_attack')
-        elif (-0.3 <= dx <= 0.3) and dy < 0:
-            pc.set_state('up_attack')
-        elif dx >= 0 and (-0.3 <= dy <= 0.3):
-            pc.set_state('right_attack')
-        elif dx < 0 and (-0.3 <= dy <= 0.3):
-            pc.set_state('left_attack')
-        elif dx >= 0 and dy >= 0:
-            pc.set_state('down_right_attack')
-        elif dx >= 0 and dy < 0:
-            pc.set_state('up_right_attack')
-        elif dx < 0 and dy >= 0:
-            pc.set_state('down_left_attack')
-        elif dx < 0 and dy < 0:
-            pc.set_state('up_left_attack')
         dist = sqrt(dx * dx + dy * dy)
         if dist <= self.ATTACK_RANGE:
+            pc.is_attack = True
             pc.attack(self)
+            if self.hp <=0:
+                pc.is_attack = False
         
     def attack(self, actor):
         '''

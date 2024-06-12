@@ -21,7 +21,7 @@ class Ruins(Area):
         from footman import Footman
         self.footman = Footman(0,0,0)
         self.add_object(self.footman, 120, 120, 1)
-        self.add_object(self.grunt, 220, 185, 1)
+        self.add_object(self.grunt, 500, 185, 1)
         p = Portal(400, 400, 200, 200, 'Village', 480, 100)
         self.add_object(p, p.pos_x, p.pos_y, 100)
         #Game.game.start_script(self.walk, "grunt", 50, 50)
@@ -29,18 +29,18 @@ class Ruins(Area):
         Game.game.start_script(self.walk_two, "footman", 50, 50)
 
 
-    def walk(self, step_x, step_y):
+    def walk(self, step_x, step_y, actor):
         '''
         Сценарий для движения бугая
 
         :param step_x: шаг движения x
         :param step_y: шаг движения y
         '''
-        if self.grunt.hp <= 0:
+        if actor.hp <= 0:
             Game.game.stop_script("grunt")
         new_x = 200
         new_y = 200
-
+        actor.is_attack = False
         # Выбираем случайное направление
         direction = random.choice(["up", "down", "left", "right"])
 
@@ -59,7 +59,7 @@ class Ruins(Area):
             new_x += step_x
 
         # Обновляем координаты бугая
-        self.grunt.search_position(new_x, new_y)  # требуется закомментировать, если выбран вариант animate_sprite
+        actor.search_position(new_x, new_y)
 
         # Ждем 2 секунды перед выбором нового направления
         time.sleep(2)
@@ -92,7 +92,7 @@ class Ruins(Area):
             new_x += step_x
 
         # Обновляем координаты рыцаря
-        self.footman.search_position(new_x, new_y)  # требуется закомментировать, если выбран вариант animate_sprite
+        self.footman.search_position(new_x, new_y)
 
         # Ждем 2 секунды перед выбором нового направления
         time.sleep(2)
@@ -113,13 +113,19 @@ class Ruins(Area):
         new_y = pc.pos_y
 
         # Обновляем координаты рыцаря
-        actor.search_position(new_x, new_y)  # требуется закомментировать, если выбран вариант animate_sprite
+        actor.search_position(new_x, new_y)
         dx = pc.pos_x - actor.pos_x
         dy = pc.pos_y - actor.pos_y
         dist = sqrt(dx * dx + dy * dy)
         if dist <= actor.ATTACK_RANGE:
+            actor.is_attack = True
             actor.attack(pc)
             if pc.hp <=0:
+                actor.update()
                 Game.game.stop_script("ai")
+                Game.game.start_script(self.walk, "grunt", 50, 50, actor)
+
+        else:
+            actor.is_attack = False
         # Ждем 2 секунды перед выбором нового направления
         time.sleep(2)
