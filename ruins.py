@@ -120,6 +120,7 @@ class Ruins(Area):
         if dist <= actor.ATTACK_RANGE:
             actor.is_attack = True
             actor.attack(pc)
+            time.sleep(1)
             if pc.hp <=0:
                 actor.update()
                 Game.game.stop_script("ai")

@@ -3,6 +3,7 @@ from math import sqrt
 from rpg.actor import Actor
 from rpg.animation import Animation
 import rpg.game
+import time
 
 class Adnd_actor(Actor):
 
@@ -35,6 +36,7 @@ class Adnd_actor(Actor):
         if dist <= self.ATTACK_RANGE:
             pc.is_attack = True
             pc.attack(self)
+            #time.sleep(0.3)
             if self.hp <=0:
                 pc.is_attack = False
         
