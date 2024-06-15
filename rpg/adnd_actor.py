@@ -18,7 +18,6 @@ class Adnd_actor(Actor):
         :param z: координата z
         '''
         super().__init__(x, y, z, **params)
-        #self.is_attack = False
         self.alive = True
         self.on_click = self.click
 
@@ -36,7 +35,7 @@ class Adnd_actor(Actor):
         if dist <= self.ATTACK_RANGE:
             pc.is_attack = True
             pc.attack(self)
-            #time.sleep(0.3)
+            time.sleep(0.125)
             if self.hp <=0:
                 pc.is_attack = False
         
@@ -51,11 +50,10 @@ class Adnd_actor(Actor):
         actor.hp -= self.damage
     def update(self):
         '''
-        обновляет персонажа
+        обновляет состояние персонажа
 
         '''
         super().update()
         if self.hp <= 0:
             self.stop_move()
             self.set_state('death')
-#            rpg.game.Game.game.current_area.remove_object(self)

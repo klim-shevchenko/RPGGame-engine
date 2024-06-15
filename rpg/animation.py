@@ -18,21 +18,6 @@ class Animation(Sprite):
         self.cycle = cycle
         self.running = True
 
-    """def update(self):
-        '''
-        Меняет текущее изображение в списке изображений
-
-        '''
-        if self.running:
-            self.counter -= 1  # Уменьшаем счетчик кадров
-            if self.counter == 0:
-                self.counter = self.speed
-                self.current_frame = (self.current_frame + 1) % len(self.images)  # Циклическое переключение кадров
-                self.image = self.images[self.current_frame]
-        else:
-            self.current_frame = 0
-            self.image = self.images[self.current_frame]"""
-
     def update(self):
         '''
         Меняет текущее изображение в списке изображений

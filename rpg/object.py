@@ -22,6 +22,11 @@ class Object():
         self.rectangle = Rectangle(x, y, 10, 10) # из спрайта
 
     def set_state(self, state_name):
+        '''
+        меняет текущее состояние объекта
+
+        :param state_name:
+        '''
         if self.current_state != state_name:
             self.current_state = state_name
             Graphics.canvas.change_sprite(self.sprite, self.states[state_name])
