@@ -63,7 +63,7 @@ class Game():
 
     def add_pc_to_team(self, pc):
         '''
-        Добавдяет персонажа в команду
+        Добавляет персонажа в команду
         :param pc: персонаж, которого нужно добавить в команду
         '''
         if pc.category == "pc":
@@ -154,25 +154,6 @@ class Game():
         for actor in self.current_area.objects:
             if actor.category == 'pc':
                 actor.search_position(event.x, event.y)
-
-    def new_item(self, name, **params):
-        '''
-        Создаёт класс, потомок от Item и создаёт поле из параметров, и установление их в начальные значения.
-
-        :param name: название нового класса
-        :param params: поля нового класса
-        '''
-        '''item_attributes = {}
-        for key, value in params.items():
-            item_attributes[key] = value
-        new_item = type(name, (Item,), item_attributes)
-        # Добавление нового предмета в словарь игры
-        self.items[name] = new_item
-        return new_item'''
-
-    def new_spell(self, name, **params):
-        ''' добавляет новое заклинание '''
-        self
 
     def timer(self):
         '''

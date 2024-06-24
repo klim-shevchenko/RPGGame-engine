@@ -11,7 +11,7 @@ import random
 class BaldursGame(Game):
     def __init__(self, canvas, window, **params):
         '''
-        Класс конкретной игры для демострации
+        Класс конкретной игры для демонстрации
 
         :param canvas: класс графической системы
         :param window: окно на которое будет выводится игра
@@ -22,5 +22,7 @@ class BaldursGame(Game):
         self.new_area('Ruins', Ruins())
         self.new_area('Village', Village())
         self.set_area('Ruins')
-        self.set_team(500, 300, 100)
+        #self.set_area('Village')
+        self.set_team(50, 400, 100)
+        #self.set_team(550, 700, 100)
         self.timer()

@@ -5,7 +5,7 @@ from rpg.rectangle import Rectangle
 class Object():
     def __init__(self, x, y, z, **params):
         '''
-        Класс объекта с который будет изменяться методами игровой системы и методами графической системы
+        Класс объекта, который будет изменяться методами игровой системы и методами графической системы
 
         :param x: координата x
         :param y: координата y
@@ -25,7 +25,7 @@ class Object():
         '''
         меняет текущее состояние объекта
 
-        :param state_name:
+        :param state_name новое состояние
         '''
         if self.current_state != state_name:
             self.current_state = state_name

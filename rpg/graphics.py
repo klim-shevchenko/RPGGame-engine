@@ -43,7 +43,7 @@ class Graphics(tk.Canvas):
 
     def change_sprite(self, sprite, new_sprite):
         '''
-        Меняет  спрайт на новый.
+        Меняет спрайт на новый в Canvas.
 
         :param sprite: экземпляр спрайта
         :param new_sprite: новый спрайт
@@ -82,7 +82,7 @@ class Graphics(tk.Canvas):
 
     def clear_all(self):
         '''
-        Удаляет все спрайты с Canvas
+        Удаляет все спрайты с Canvas.
 
         '''
         for sprite in self.sprites:

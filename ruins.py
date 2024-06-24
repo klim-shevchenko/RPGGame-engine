@@ -20,8 +20,8 @@ class Ruins(Area):
         self.grunt = Grunt(0,0,0)
         from footman import Footman
         self.footman = Footman(0,0,0)
-        self.add_object(self.footman, 120, 120, 1)
-        self.add_object(self.grunt, 500, 185, 1)
+        self.add_object(self.footman, 120, 620, 1)
+        self.add_object(self.grunt, 500, 685, 1)
         p = Portal(400, 400, 200, 200, 'Village', 480, 100)
         self.add_object(p, p.pos_x, p.pos_y, 100)
         #Game.game.start_script(self.walk, "grunt", 50, 50)
@@ -38,8 +38,8 @@ class Ruins(Area):
         '''
         if actor.hp <= 0:
             Game.game.stop_script("grunt")
-        new_x = 200
-        new_y = 200
+        new_x = 300
+        new_y = 500
         actor.is_attack = False
         # Выбираем случайное направление
         direction = random.choice(["up", "down", "left", "right"])
@@ -71,8 +71,8 @@ class Ruins(Area):
         :param step_x: шаг движения x
         :param step_y: шаг движения y
         '''
-        new_x = 100
-        new_y = 100
+        new_x = 200
+        new_y = 600
 
         # Выбираем случайное направление
         direction = random.choice(["up", "down", "left", "right"])
